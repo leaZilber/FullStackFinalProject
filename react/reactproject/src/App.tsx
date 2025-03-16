@@ -1,14 +1,18 @@
 import './App.css'
+// import { AboutUs } from './components/aboutUs'
+// import { InformationPage } from './components/information'
 // import LoginComp from './homeComponents/login'
-import RegisterComp from './homeComponents/register'
-// import { HomePage } from './homePage'
+// import RegisterComp from './homeComponents/register'
+import { HomePage } from './components/homePage'
+// import { CheckPicture } from './components/checkPictu'
 
 function App() {
   return (
     <>
-      <RegisterComp />
-      {/* <LoginComp /> */}
-      {/* <HomePage /> */}
+    {/* <CheckPicture/> */}
+    {/* <AboutUs/> */}
+    {/* <InformationPage/> */}
+      <HomePage />
     </>
   )
 }

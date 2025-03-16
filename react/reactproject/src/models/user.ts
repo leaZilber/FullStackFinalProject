@@ -12,7 +12,6 @@ export class User {
     UserCreateDate: Date;
     UserUpdateDate: Date;
     TestResualtArray: TestResult[];
-    // private UserPropile:URL;
     constructor(data: Partial<User> = {}) {
         this.UserId = data.UserId ?? 0;
         this.UserName = data.UserName ?? "";
