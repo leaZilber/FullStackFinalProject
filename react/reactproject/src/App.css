@@ -1,8 +1,9 @@
 #root {
-  max-width: 1280px;
+  max-width: 100vh;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  overflow-x: hidden;
 }
 
 .logo {
@@ -11,9 +12,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +25,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -40,3 +44,156 @@
 .read-the-docs {
   color: #888;
 }
+
+#headerContainer {
+  position: fixed;
+  /* מקבע את הדיב בראש הדף */
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* רוחב מלא של המסך */
+  height: 70px;
+  /* ניתן לשנות לפי הצורך */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* אפשר לשנות לפי הצורך */
+  z-index: 1000;
+  /* מבטיח שהתפריט יהיה מעל שאר האלמנטים */
+}
+
+#backgroundHome {
+  position: absolute;
+  /* ממקם את התמונה ביחס לדף */
+  top: 60px;
+  /* גובה ה-header (עדכן לפי הצורך) */
+  left: 0;
+  width: 100vw;
+  /* רוחב מלא של המסך */
+  height: calc(100vh - 60px);
+  /* גובה מלא של המסך פחות ה-header */
+  object-fit: cover;
+  /* מבטיח שהתמונה תמלא את כל השטח בלי לעוות */
+  opacity: 0.3;
+  /* שקיפות נמוכה (ניתן להגדיל/להקטין) */
+  z-index: -1;
+  /* שולח את התמונה לרקע, מאחורי כל האלמנטים */
+  position: fixed;
+}
+
+
+/* העיגול */
+#roundLogin {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background-color: rgb(34, 90, 90);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1100;
+  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+  padding: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* כשהעכבר עובר על העיגול הוא גדל */
+#roundLogin:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* עיצוב הכפתורים */
+button {
+  border: none;
+  background-color: white;
+  color:black;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+/* כשהעכבר עובר על הכפתורים – אין שינוי גודל, רק צבע */
+button:hover {
+  opacity: 0.7;
+}
+
+
+#informarioncontainer {
+  width: 60%;
+  position: absolute;
+  /* מיקום מוחלט */
+  right: 65px;
+  /* להצמיד לימין */
+  top: 180px;
+  /* התאמת המיקום כך שלא יתחיל מתחת ל-header (שנה את הערך בהתאם לגובה ה-header) */
+  direction: rtl;
+  /* כיוון כתיבה ימין-לשמאל */
+  text-align: right;
+  /* יישור הטקסט לימין */
+  overflow-x: hidden;
+}
+
+#infoTitle {
+  position: fixed;
+  /* גורם לאלמנט להישאר במקום קבוע בעת גלילה */
+  top: 65px;
+  /* מרווח מהחלק העליון של המסך */
+  left: 0;
+  /* מבטיח שהוא מתחיל מקצה שמאל */
+  right: 0;
+  /* מבטיח שהוא נמתח עד קצה ימין */
+  background-color: white;
+  /* רקע לבן */
+  width: 100%;
+  /* מכסה את כל רוחב המסך */
+  z-index: 1000;
+  /* מבטיח שהכותרת תהיה מעל שאר האלמנטים */
+  padding: 10px 0;
+  /* מוסיף רווח פנימי */
+  display: flex;
+  /* מאפשר יישור טוב יותר */
+  justify-content: center;
+  /* ממרכז אופקית */
+  align-items: center;
+  /* ממרכז אנכית */
+  height: 80px;
+  /* הגבהתי ל-80px כדי שיהיה מקום לטקסט */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  /* מוסיף צל עדין להפרדה */
+}
+
+#infoText {
+  font-size: 20px;
+  text-align: center;
+  /* ממרכז טקסט */
+  margin: 0;
+  /* מבטל מרווחים פנימיים */
+  width: 100%;
+  /* גורם לטקסט להתרחב לכל הרוחב */
+  white-space: nowrap;
+  /* מונע שבירת שורה אם יש בעיה ברוחב */
+  overflow: hidden;
+  /* מונע גלילה פנימית */
+  text-overflow: ellipsis;
+  /* מוסיף "..." במקרה שהטקסט נחתך */
+}
+
+
+#sidebarInfo {
+  background-color: white;
+  opacity: 0.5;
+}
+
+
+/*צבע העיגול כדי לדגום*/
+/* background-color: rgb(34, 90, 90); */
