@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="C:\Users\user1\Desktop\תכנות שנה ב\finalProject\Net\Class1.cs" Link="Class1.cs" />
+    <ProjectReference Include="..\FinalProject.Clean\FinalProject.Core.csproj" />
   </ItemGroup>
 
 </Project>

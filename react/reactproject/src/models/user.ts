@@ -1,4 +1,6 @@
-import { TestResult } from "./testResults";
+import { Message } from "react-hook-form";
+import { TestResult } from "./testResault";
+import { Turn } from "./turn";
 
 export class User {
     UserId: number;
@@ -12,6 +14,8 @@ export class User {
     UserCreateDate: Date;
     UserUpdateDate: Date;
     TestResualtArray: TestResult[];
+    MessagesArr: Message[];
+    TurnsArr:Turn[];
     constructor(data: Partial<User> = {}) {
         this.UserId = data.UserId ?? 0;
         this.UserName = data.UserName ?? "";
@@ -24,5 +28,7 @@ export class User {
         this.UserCreateDate = data.UserCreateDate ?? new Date();
         this.UserUpdateDate = data.UserUpdateDate ?? new Date();
         this.TestResualtArray = data.TestResualtArray ?? [];
+        this.MessagesArr = data.MessagesArr ?? [];
+        this.TurnsArr=data.TurnsArr??[];
     }
 }

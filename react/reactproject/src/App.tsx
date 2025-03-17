@@ -1,9 +1,9 @@
 import './App.css'
-import { Schedule1 } from './components/schedule'
+// import { Schedule1 } from './components/schedule'
 import { Doctor } from './models/doctor';
 import { Schedule } from './models/schedule';
 import { Turn } from './models/turn';
-// import { AboutUs } from './components/aboutUs'
+import { AboutUs } from './components/aboutUs'
 // import { InformationPage } from './components/information'
 // import LoginComp from './homeComponents/login'
 // import RegisterComp from './homeComponents/register'
@@ -68,9 +68,9 @@ function App() {
 
   return (
     <>
-      <Schedule1 doctors={doctorsArr} />
+      {/* <Schedule1 doctors={doctorsArr} /> */}
       {/* <CheckPicture/> */}
-      {/* <AboutUs/> */}
+      <AboutUs/>
       {/* <InformationPage/> */}
       {/* <HomePage /> */}
     </>
