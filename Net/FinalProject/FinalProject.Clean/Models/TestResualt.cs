@@ -8,7 +8,7 @@ namespace FinalProject.Core.Models
 {
     public class TestResualt
     {
-        public string TestCode { get; set; }
+        public int TestCode { get; set; }
         public DateTime TestDate { get; set; }
         public string ImageUrl { get; set; }
         public int PatientId { get; set; }

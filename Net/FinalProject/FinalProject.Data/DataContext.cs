@@ -8,9 +8,18 @@ namespace FinalProject.Data
     {
         public List<User> userList { get; set; }
         public List<Doctor> doctorList { get; set; }
-
+        public List<Turn> turnList { get; set; }
+        public List<Message> messagesList { get; set; }
+        public List<Schedule> scheduleList { get; set; }
+        public List<TestResualt> testResaultList { get; set; }
         public DataContext()
         {
+            doctorList = new List<Doctor>();
+            turnList = new List<Turn>();
+            messagesList = new List<Message>();
+            scheduleList = new List<Schedule>();
+            testResaultList = new List<TestResualt>();
+
             userList = new List<User>
             {
                 new User
@@ -29,7 +38,7 @@ namespace FinalProject.Data
                     {
                         new TestResualt
                         {
-                            TestCode = "A123",
+                            TestCode = 123,
                             TestDate = DateTime.Now,
                             ImageUrl = "https://example.com/test1.jpg",
                             PatientId = 1,
@@ -77,7 +86,7 @@ namespace FinalProject.Data
                     {
                         new TestResualt
                         {
-                            TestCode = "B456",
+                            TestCode = 456,
                             TestDate = DateTime.Now.AddDays(-7),
                             ImageUrl = "https://example.com/test2.jpg",
                             PatientId = 2,

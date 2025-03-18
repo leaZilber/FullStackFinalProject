@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FinalProject.Core.IRepositories;
+using FinalProject.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,33 @@ namespace FinalProject.Service.Services
 {
     public class TestResaultService
     {
+        private readonly ITestResualtRepository _testResaultRepository;
+        public TestResaultService(ITestResualtRepository testResaultRepository)
+        {
+            _testResaultRepository = testResaultRepository;
+        }
+        public List<TestResualt> GetAllTestResualt()
+        {
+            return _testResaultRepository.GetAll();
+        }
 
+        public TestResualt? GetTestResualt(int id)
+        {
+            return _testResaultRepository.GetById(id);
+        }
+
+        public TestResualt Add(TestResualt test)
+        {
+            return _testResaultRepository.Add(test);
+        }
+        public TestResualt UpDate(TestResualt test)
+        {
+            return _testResaultRepository.Update(test);
+        }
+
+        public void Delete(int id)
+        {
+            _testResaultRepository.Delete(id);
+        }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Service.Services
 {
-    public class UserService:IUserService
+    public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
         public UserService(IUserRepository userRepository)
@@ -18,7 +18,26 @@ namespace FinalProject.Service.Services
         }
         public List<User> GetAllUsers()
         {
-            return _userRepository.GetUserList();
+            return _userRepository.GetAll();
+        }
+
+        public User? GetUser(int id)
+        {
+            return _userRepository.GetById(id);
+        }
+
+        public User Add(User user)
+        {
+            return _userRepository.Add(user);
+        }
+        public User UpDate(User user)
+        {
+            return _userRepository.Update(user);
+        }
+
+        public void Delete(int id)
+        {
+            _userRepository.Delete(id);
         }
     }
 }

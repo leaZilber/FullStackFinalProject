@@ -8,6 +8,7 @@ namespace FinalProject.Core.Models
 {
     public class Schedule
     {
-       public Turn[] turns { get; set; }
+        public int ScheduleId { get; set; }
+        public Turn[] turns { get; set; }
     }
 }

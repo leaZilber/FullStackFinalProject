@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Core.IRepositories
 {
-    public class IUserRepository
+    public interface IUserRepository
     {
-        List<User> GetUserList();
-
+        List<User> GetAll();
+        User GetById(int id);
+        User Add(User newUser);
+        User Update(User upUser);
+        void Delete(int id);
     }
 }
