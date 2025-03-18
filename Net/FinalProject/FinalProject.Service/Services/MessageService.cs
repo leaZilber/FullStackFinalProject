@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.IRepositories;
+using FinalProject.Core.IServices;
 using FinalProject.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Service.Services
 {
-    public class MessageService
+    public class MessageService:IMessageService
     {
         private readonly IMessageRepository _messageRepository;
         public MessageService(IMessageRepository messageRepository)

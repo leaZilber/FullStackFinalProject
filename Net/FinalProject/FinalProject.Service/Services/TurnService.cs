@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.IRepositories;
+using FinalProject.Core.IServices;
 using FinalProject.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Service.Services
 {
-    public class TurnService
+    public class TurnService:ITurnService
     {
         private readonly ITurnRepository _turnRepository;
         public TurnService(ITurnRepository turnRepository)

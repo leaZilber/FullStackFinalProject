@@ -1,4 +1,5 @@
-﻿using FinalProject.Core.Models;
+﻿using FinalProject.Core.IRepositories;
+using FinalProject.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Data.Repositories
 {
-    public class TestResaltRepository
+    public class TestResaltRepository:ITestResualtRepository
     {
         private readonly DataContext _context;
         public TestResaltRepository(DataContext context)

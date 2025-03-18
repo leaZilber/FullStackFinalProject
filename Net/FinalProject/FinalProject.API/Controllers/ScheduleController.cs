@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FinalProject.Core.IServices;
+using FinalProject.Core.Models;
+using FinalProject.Service.Services;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +11,49 @@ namespace FinalProject.API.Controllers
     [ApiController]
     public class ScheduleController : ControllerBase
     {
+        private readonly IScheduleService _scheduleService;
+        public ScheduleController(IScheduleService scheduleService)
+        {
+            _scheduleService = scheduleService;
+        }
         // GET: api/<ScheduleController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var sched = _scheduleService.GetAllSchedules();
+            return Ok(sched);
         }
 
-        // GET api/<ScheduleController>/5
+        // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult Get(int id)
         {
-            return "value";
+            var sched = _scheduleService.GetSchedule(id);
+            return Ok(sched);
         }
 
-        // POST api/<ScheduleController>
+        // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] Schedule value)
         {
+            var newSchedule = _scheduleService.Add(value);
+            return Ok(newSchedule);
         }
 
-        // PUT api/<ScheduleController>/5
+        // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put([FromBody] Schedule value)
         {
+            var upSchedule = _scheduleService.UpDate(value);
+            return Ok(upSchedule);
         }
 
-        // DELETE api/<ScheduleController>/5
+        // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            _scheduleService.Delete(id);
+            return Ok();
         }
     }
 }

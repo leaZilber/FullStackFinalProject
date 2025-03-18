@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FinalProject.Core.IServices;
+using FinalProject.Core.Models;
+using FinalProject.Service.Services;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +11,50 @@ namespace FinalProject.API.Controllers
     [ApiController]
     public class DoctorController : ControllerBase
     {
+        private readonly IDoctorService _doctorService;
+        public DoctorController(IDoctorService doctorService)
+        {
+            _doctorService = doctorService;
+        }
+
         // GET: api/<DoctorController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var doctors = _doctorService.GetAllDoctors();
+            return Ok(doctors);
         }
 
-        // GET api/<DoctorController>/5
+        // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult Get(int id)
         {
-            return "value";
+            var doctor = _doctorService.GetDoctor(id);
+            return Ok(doctor);
         }
 
-        // POST api/<DoctorController>
+        // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] Doctor value)
         {
+            var newDoctor = _doctorService.Add(value);
+            return Ok(newDoctor);
         }
 
-        // PUT api/<DoctorController>/5
+        // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put([FromBody] Doctor value)
         {
+            var upDoctor = _doctorService.UpDate(value);
+            return Ok(upDoctor);
         }
 
-        // DELETE api/<DoctorController>/5
+        // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            _doctorService.Delete(id);
+            return Ok();
         }
     }
 }

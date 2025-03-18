@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FinalProject.Core.IServices;
+using FinalProject.Core.Models;
+using FinalProject.Service.Services;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +11,49 @@ namespace FinalProject.API.Controllers
     [ApiController]
     public class MessageController : ControllerBase
     {
+        private readonly IMessageService _messageService;
+        public MessageController(IMessageService messageService)
+        {
+            _messageService = messageService;
+        }
         // GET: api/<MessageController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var messages = _messageService.GetAllMessages();
+            return Ok(messages);
         }
 
-        // GET api/<MessageController>/5
+        // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult Get(int id)
         {
-            return "value";
+            var message = _messageService.GetMessage(id);
+            return Ok(message);
         }
 
-        // POST api/<MessageController>
+        // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] Message value)
         {
+            var newMessage = _messageService.Add(value);
+            return Ok(newMessage);
         }
 
-        // PUT api/<MessageController>/5
+        // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put([FromBody] Message value)
         {
+            var upMessage = _messageService.UpDate(value);
+            return Ok(upMessage);
         }
 
-        // DELETE api/<MessageController>/5
+        // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            _messageService.Delete(id);
+            return Ok();
         }
     }
 }

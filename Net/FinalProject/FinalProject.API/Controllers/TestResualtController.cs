@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FinalProject.Core.IServices;
+using FinalProject.Core.Models;
+using FinalProject.Service.Services;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +11,49 @@ namespace FinalProject.API.Controllers
     [ApiController]
     public class TestResualtController : ControllerBase
     {
+        private readonly ITestResualtService _testResualtService;
+        public TestResualtController(ITestResualtService testResualtService)
+        {
+            _testResualtService = testResualtService;
+        }
         // GET: api/<TestResualtController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var testResualts = _testResualtService.GetAllTestResualt();
+            return Ok(testResualts);
         }
 
-        // GET api/<TestResualtController>/5
+        // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult Get(int id)
         {
-            return "value";
+            var test = _testResualtService.GetTestResualt(id);
+            return Ok(test);
         }
 
-        // POST api/<TestResualtController>
+        // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] TestResualt value)
         {
+            var newTestResault = _testResualtService.Add(value);
+            return Ok(newTestResault);
         }
 
-        // PUT api/<TestResualtController>/5
+        // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put([FromBody] TestResualt value)
         {
+            var upTest = _testResualtService.UpDate(value);
+            return Ok(upTest);
         }
 
-        // DELETE api/<TestResualtController>/5
+        // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            _testResualtService.Delete(id);
+            return Ok();
         }
     }
 }

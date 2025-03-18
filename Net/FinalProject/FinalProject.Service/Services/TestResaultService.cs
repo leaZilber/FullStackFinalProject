@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.IRepositories;
+using FinalProject.Core.IServices;
 using FinalProject.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Service.Services
 {
-    public class TestResaultService
+    public class TestResaultService:ITestResualtService
     {
         private readonly ITestResualtRepository _testResaultRepository;
         public TestResaultService(ITestResualtRepository testResaultRepository)

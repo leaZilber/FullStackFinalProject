@@ -13,28 +13,26 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IDoctorService, DoctorService>();
+builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+
+builder.Services.AddScoped<IMessageService, MessageService>();
+builder.Services.AddScoped<IMessageRepository, MessageRepositiory>();
+
+
+builder.Services.AddScoped<IScheduleService, ScheduleService>();
+builder.Services.AddScoped<IScheduleRepository, ScheduleRepositiory>();
+
+
+builder.Services.AddScoped<ITestResualtService, TestResaultService>();
+builder.Services.AddScoped<ITestResualtRepository, TestResaltRepository>();
+
+builder.Services.AddScoped<ITurnService, TurnService>();
+builder.Services.AddScoped<ITurnRepository, TurnRepository>();
+
+
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-
-//builder.Services.AddScoped<IDoctorService, DoctorService>();
-//builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-
-//builder.Services.AddScoped<IUserService, UserService>();
-//builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-
-//builder.Services.AddScoped<IUserService, UserService>();
-//builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-
-//builder.Services.AddScoped<IUserService, UserService>();
-//builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-
-//builder.Services.AddScoped<IUserService, UserService>();
-//builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddSingleton<DataContext>();
 var app = builder.Build();

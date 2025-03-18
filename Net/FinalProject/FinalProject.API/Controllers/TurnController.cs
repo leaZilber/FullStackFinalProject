@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FinalProject.Core.IServices;
+using FinalProject.Core.Models;
+using FinalProject.Service.Services;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +11,49 @@ namespace FinalProject.API.Controllers
     [ApiController]
     public class TurnController : ControllerBase
     {
+        private readonly ITurnService _turnService;
+        public TurnController(ITurnService turnService)
+        {
+            _turnService = turnService;
+        }
         // GET: api/<TurnController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var turns = _turnService.GetAllTurns();
+            return Ok(turns);
         }
 
-        // GET api/<TurnController>/5
+        // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult Get(int id)
         {
-            return "value";
+            var turn = _turnService.GetTurn(id);
+            return Ok(turn);
         }
 
-        // POST api/<TurnController>
+        // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] Turn value)
         {
+            var newTurn = _turnService.Add(value);
+            return Ok(newTurn);
         }
 
-        // PUT api/<TurnController>/5
+        // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put([FromBody] Turn value)
         {
+            var upTurn = _turnService.UpDate(value);
+            return Ok(upTurn);
         }
 
-        // DELETE api/<TurnController>/5
+        // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            _turnService.Delete(id);
+            return Ok();
         }
     }
 }

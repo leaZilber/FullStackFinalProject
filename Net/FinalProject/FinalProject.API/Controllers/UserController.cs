@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.IServices;
+using FinalProject.Core.Models;
 using FinalProject.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,38 +15,47 @@ namespace FinalProject.API.Controllers
 
         public UserController(IUserService userService)
         {
-            _userService = userService; 
+            _userService = userService;
         }
         // GET: api/<UserController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var users = _userService.GetAllUsers();
+            return Ok(users);
         }
 
         // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult Get(int id)
         {
-            return "value";
+            var user = _userService.GetUser(id);
+            return Ok(user);
         }
 
         // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] User value)
         {
+            var newUser = _userService.Add(value);
+            return Ok(newUser);
         }
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put([FromBody] User value)
         {
+            var upUser = _userService.UpDate(value);
+            return Ok(upUser);
+
         }
 
         // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            _userService.Delete(id);
+            return Ok();
         }
     }
 }
