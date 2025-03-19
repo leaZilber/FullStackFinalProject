@@ -16,7 +16,7 @@ namespace FinalProject.Service.Services
         {
             _testResaultRepository = testResaultRepository;
         }
-        public List<TestResualt> GetAllTestResualt()
+        public IEnumerable<TestResualt> GetAllTestResualt()
         {
             return _testResaultRepository.GetAll();
         }

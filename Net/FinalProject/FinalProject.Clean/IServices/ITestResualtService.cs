@@ -10,7 +10,7 @@ namespace FinalProject.Core.IServices
 {
     public interface ITestResualtService
     {
-        List<TestResualt> GetAllTestResualt();
+        IEnumerable<TestResualt> GetAllTestResualt();
         TestResualt? GetTestResualt(int id);
         TestResualt Add(TestResualt test);
         TestResualt UpDate(TestResualt test);

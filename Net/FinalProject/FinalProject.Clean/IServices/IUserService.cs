@@ -10,7 +10,7 @@ namespace FinalProject.Core.IServices
 {
     public interface IUserService
     {
-        List<User> GetAllUsers();
+        IEnumerable<User> GetAllUsers();
         User? GetUser(int id);
         User Add(User user);
         User UpDate(User user);

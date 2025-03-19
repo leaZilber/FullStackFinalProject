@@ -1,5 +1,6 @@
 ﻿using FinalProject.Core.IRepositories;
 using FinalProject.Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Data.Repositories
 {
-    public class MessageRepositiory:IMessageRepository
+    public class MessageRepositiory : IMessageRepository
     {
         private readonly DataContext _context;
         public MessageRepositiory(DataContext context)
         {
             _context = context;
         }
-        public List<Message> GetAll()
+        public IEnumerable<Message> GetAll()
         {
-            return _context.messagesList;
+            return _context.messagesList.Include(m=>m.User);
         }
 
         public Message? GetById(int id)
@@ -28,6 +29,7 @@ namespace FinalProject.Data.Repositories
         public Message Add(Message newMessage)
         {
             _context.messagesList.Add(newMessage);
+            _context.SaveChanges();
             return newMessage;
         }
 
@@ -40,6 +42,7 @@ namespace FinalProject.Data.Repositories
             }
             _context.messagesList.Remove(isExist);
             _context.messagesList.Add(isExist);
+            _context.SaveChanges();
             return isExist;
         }
 
@@ -50,6 +53,7 @@ namespace FinalProject.Data.Repositories
             {
                 _context.messagesList.Remove(isExist);
             }
+            _context.SaveChanges();
         }
     }
 }

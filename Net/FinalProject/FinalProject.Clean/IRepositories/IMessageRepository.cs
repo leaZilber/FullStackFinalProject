@@ -9,7 +9,7 @@ namespace FinalProject.Core.IRepositories
 {
     public interface IMessageRepository
     {
-        List<Message> GetAll();
+        IEnumerable<Message> GetAll();
         Message? GetById(int id);
         Message Add(Message newMessage);
         Message Update(Message upMessage);

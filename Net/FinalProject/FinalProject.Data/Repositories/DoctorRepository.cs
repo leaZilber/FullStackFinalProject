@@ -1,5 +1,6 @@
 ﻿using FinalProject.Core.IRepositories;
 using FinalProject.Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ namespace FinalProject.Data.Repositories
         {
             _context = context;
         }
-        public List<Doctor> GetAll()
+        public IEnumerable<Doctor> GetAll()
         {
-            return _context.doctorList;
+            return _context.doctorList.Include(d=>d.DoctorSchedule);
         }
 
         public Doctor? GetById(int id)
@@ -28,6 +29,7 @@ namespace FinalProject.Data.Repositories
         public Doctor Add(Doctor newDoctor)
         {
             _context.doctorList.Add(newDoctor);
+            _context.SaveChanges();
             return newDoctor;
         }
 
@@ -40,6 +42,7 @@ namespace FinalProject.Data.Repositories
             }
             _context.doctorList.Remove(isExist);
             _context.doctorList.Add(isExist);
+            _context.SaveChanges();
             return isExist;
         }
 
@@ -50,6 +53,7 @@ namespace FinalProject.Data.Repositories
             {
                 _context.doctorList.Remove(isExist);
             }
+            _context.SaveChanges();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace FinalProject.Core.IServices
 {
     public interface IDoctorService
     {
-        List<Doctor> GetAllDoctors();
+        IEnumerable<Doctor> GetAllDoctors();
         Doctor? GetDoctor(int id);
         Doctor Add(Doctor doctor);
         Doctor UpDate(Doctor doctor);

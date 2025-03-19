@@ -9,7 +9,7 @@ namespace FinalProject.Core.IRepositories
 {
     public interface ITurnRepository
     {
-        List<Turn> GetAll();
+        IEnumerable<Turn> GetAll();
         Turn? GetById(int id);
         Turn Add(Turn newTurn);
         Turn Update(Turn upTurn);

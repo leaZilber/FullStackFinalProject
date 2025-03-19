@@ -17,7 +17,7 @@ namespace FinalProject.Service.Services
             _messageRepository = messageRepository;
 
         }
-        public List<Message> GetAllMessages()
+        public IEnumerable<Message> GetAllMessages()
         {
             return _messageRepository.GetAll();
         }

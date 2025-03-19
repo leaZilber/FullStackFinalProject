@@ -16,7 +16,7 @@ namespace FinalProject.Service.Services
         {
             _turnRepository = turnRepository;
         }
-        public List<Turn> GetAllTurns()
+        public IEnumerable<Turn> GetAllTurns()
         {
             return _turnRepository.GetAll();
         }

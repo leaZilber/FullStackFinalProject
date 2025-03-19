@@ -1,5 +1,6 @@
 ﻿using FinalProject.Core.IRepositories;
 using FinalProject.Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ namespace FinalProject.Data.Repositories
         {
             _context = context;
         }
-        public List<Turn> GetAll()
+        public IEnumerable<Turn> GetAll()
         {
-            return _context.turnList;
+            return _context.turnList.Include(t=>t.User);
         }
 
         public Turn? GetById(int id)
@@ -28,6 +29,7 @@ namespace FinalProject.Data.Repositories
         public Turn Add(Turn newTurn)
         {
             _context.turnList.Add(newTurn);
+            _context.SaveChanges();
             return newTurn;
         }
 
@@ -40,6 +42,7 @@ namespace FinalProject.Data.Repositories
             }
             _context.turnList.Remove(isExist);
             _context.turnList.Add(isExist);
+            _context.SaveChanges();
             return isExist;
         }
 
@@ -50,6 +53,7 @@ namespace FinalProject.Data.Repositories
             {
                 _context.turnList.Remove(isExist);
             }
+            _context.SaveChanges();
         }
     }
 }

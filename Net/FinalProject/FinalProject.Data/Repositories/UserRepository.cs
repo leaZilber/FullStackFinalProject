@@ -1,5 +1,6 @@
 ﻿using FinalProject.Core.IRepositories;
 using FinalProject.Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ namespace FinalProject.Data.Repositories
         {
             _context = context;
         }
-        public List<User> GetAll()
+        public IEnumerable<User> GetAll()
         {
-            return _context.userList;
+            return _context.userList.Include(u=>u.turns);
         }
 
         public User? GetById(int id)
@@ -28,6 +29,7 @@ namespace FinalProject.Data.Repositories
         public User Add(User newUser)
         {
             _context.userList.Add(newUser);
+            _context.SaveChanges();
             return newUser;
         }
 
@@ -40,6 +42,7 @@ namespace FinalProject.Data.Repositories
             }
             _context.userList.Remove(isExist);
             _context.userList.Add(isExist);
+            _context.SaveChanges();
             return isExist;
         }
 
@@ -50,6 +53,7 @@ namespace FinalProject.Data.Repositories
             {
                 _context.userList.Remove(isExist);
             }
+            _context.SaveChanges();
         }
     }
 }

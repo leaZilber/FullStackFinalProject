@@ -16,7 +16,7 @@ namespace FinalProject.Service.Services
         {
             _userRepository = userRepository;
         }
-        public List<User> GetAllUsers()
+        public IEnumerable<User> GetAllUsers()
         {
             return _userRepository.GetAll();
         }

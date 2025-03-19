@@ -16,7 +16,7 @@ namespace FinalProject.Service.Services
         {
             _doctorRepository = doctorRepository;
         }
-        public List<Doctor> GetAllDoctors()
+        public IEnumerable<Doctor> GetAllDoctors()
         {
             return _doctorRepository.GetAll();
         }

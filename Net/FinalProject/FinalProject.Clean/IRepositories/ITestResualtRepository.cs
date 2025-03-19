@@ -9,7 +9,7 @@ namespace FinalProject.Core.IRepositories
 {
     public interface ITestResualtRepository
     {
-        List<TestResualt> GetAll();
+        IEnumerable<TestResualt> GetAll();
         TestResualt? GetById(int id);
         TestResualt Add(TestResualt newTestResault);
         TestResualt Update(TestResualt upTestResault);

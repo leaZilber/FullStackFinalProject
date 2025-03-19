@@ -3,6 +3,7 @@ using FinalProject.Core.IServices;
 using FinalProject.Data;
 using FinalProject.Data.Repositories;
 using FinalProject.Service.Services;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +35,16 @@ builder.Services.AddScoped<ITurnRepository, TurnRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-builder.Services.AddSingleton<DataContext>();
+builder.Services.AddDbContext<DataContext>();
+builder.Services.AddControllers();
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.WriteIndented = true;
+});
+
+//builder.Services.AddSingleton<DataContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

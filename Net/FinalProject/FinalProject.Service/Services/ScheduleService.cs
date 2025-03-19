@@ -16,7 +16,7 @@ namespace FinalProject.Service.Services
         {
             _scheduleRepository = scheduleRepository;
         }
-        public List<Schedule> GetAllSchedules()
+        public IEnumerable<Schedule> GetAllSchedules()
         {
             return _scheduleRepository.GetAll();
         }

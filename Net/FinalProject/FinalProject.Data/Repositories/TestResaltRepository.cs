@@ -1,5 +1,6 @@
 ﻿using FinalProject.Core.IRepositories;
 using FinalProject.Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,31 +16,33 @@ namespace FinalProject.Data.Repositories
         {
             _context = context;
         }
-        public List<TestResualt> GetAll()
+        public IEnumerable<TestResualt> GetAll()
         {
-            return _context.testResaultList;
+            return _context.testResaultList.Include(t => t.User);
         }
 
         public TestResualt? GetById(int id)
         {
-            return _context.testResaultList.FirstOrDefault(item => item.TestCode == id);
+            return _context.testResaultList.FirstOrDefault(item => item.TestId == id);
         }
 
         public TestResualt Add(TestResualt newTestResault)
         {
             _context.testResaultList.Add(newTestResault);
+            _context.SaveChanges();
             return newTestResault;
         }
 
         public TestResualt Update(TestResualt upTestResault)
         {
-            var isExist = GetById(upTestResault.TestCode);
+            var isExist = GetById(upTestResault.TestId);
             if (isExist is null)
             {
                 throw new Exception("Test Resault not found");
             }
             _context.testResaultList.Remove(isExist);
             _context.testResaultList.Add(isExist);
+            _context.SaveChanges();
             return isExist;
         }
 
@@ -50,6 +53,7 @@ namespace FinalProject.Data.Repositories
             {
                 _context.testResaultList.Remove(isExist);
             }
+            _context.SaveChanges();
         }
     }
 }

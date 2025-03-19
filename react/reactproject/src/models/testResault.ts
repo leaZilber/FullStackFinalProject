@@ -1,11 +1,11 @@
 export class TestResult {
-    TestCode: string;
+    TestId: string;
     TestDate: Date;
     ImageUrl: string;
     PatientId: string;
     Summary: string;
     constructor(data: Partial<TestResult> = {}) {
-        this.TestCode = data.TestCode ?? "UNKNOWN";
+        this.TestId = data.TestId ?? "UNKNOWN";
         this.TestDate = data.TestDate ?? new Date();
         this.ImageUrl = data.ImageUrl ?? "";
         this.PatientId = data.PatientId ?? "";

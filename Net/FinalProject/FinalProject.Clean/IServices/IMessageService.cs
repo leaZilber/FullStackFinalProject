@@ -10,7 +10,7 @@ namespace FinalProject.Core.IServices
 {
     public interface IMessageService
     {
-        List<Message> GetAllMessages();
+        IEnumerable<Message> GetAllMessages();
         Message? GetMessage(int id);
         Message Add(Message mes);
         Message UpDate(Message mes);

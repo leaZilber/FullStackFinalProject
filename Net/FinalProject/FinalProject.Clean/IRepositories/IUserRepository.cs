@@ -9,7 +9,7 @@ namespace FinalProject.Core.IRepositories
 {
     public interface IUserRepository
     {
-        List<User> GetAll();
+        IEnumerable<User> GetAll();
         User GetById(int id);
         User Add(User newUser);
         User Update(User upUser);

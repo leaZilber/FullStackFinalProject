@@ -9,7 +9,7 @@ namespace FinalProject.Core.IRepositories
 {
     public interface IDoctorRepository
     {
-        List<Doctor> GetAll();
+        IEnumerable<Doctor> GetAll();
         Doctor? GetById(int id);
         Doctor Add(Doctor newDoctor);
         Doctor Update(Doctor upDoctor);

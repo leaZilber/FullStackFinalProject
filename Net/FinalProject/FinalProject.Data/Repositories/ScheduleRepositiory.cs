@@ -1,5 +1,6 @@
 ﻿using FinalProject.Core.IRepositories;
 using FinalProject.Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ namespace FinalProject.Data.Repositories
         {
             _context = context;
         }
-        public List<Schedule> GetAll()
+        public IEnumerable<Schedule> GetAll()
         {
-            return _context.scheduleList;
+            return _context.scheduleList.Include(s=>s.doctor);
         }
 
         public Schedule? GetById(int id)
@@ -28,6 +29,7 @@ namespace FinalProject.Data.Repositories
         public Schedule Add(Schedule newTestResault)
         {
             _context.scheduleList.Add(newTestResault);
+            _context.SaveChanges();
             return newTestResault;
         }
 
@@ -40,6 +42,7 @@ namespace FinalProject.Data.Repositories
             }
             _context.scheduleList.Remove(isExist);
             _context.scheduleList.Add(isExist);
+            _context.SaveChanges();
             return isExist;
         }
 
@@ -50,6 +53,7 @@ namespace FinalProject.Data.Repositories
             {
                 _context.scheduleList.Remove(isExist);
             }
+            _context.SaveChanges();
         }
     }
 }

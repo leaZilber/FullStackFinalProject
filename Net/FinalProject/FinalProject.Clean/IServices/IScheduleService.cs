@@ -10,7 +10,7 @@ namespace FinalProject.Core.IServices
 {
     public interface IScheduleService
     {
-        List<Schedule> GetAllSchedules();
+        IEnumerable<Schedule> GetAllSchedules();
         Schedule? GetSchedule(int id);
         Schedule Add(Schedule sched);
         Schedule UpDate(Schedule user);
