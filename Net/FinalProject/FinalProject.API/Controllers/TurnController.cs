@@ -1,4 +1,8 @@
-﻿using FinalProject.Core.IServices;
+﻿using AutoMapper;
+using FinalProject.API.Models;
+using FinalProject.Core;
+using FinalProject.Core.DTOs;
+using FinalProject.Core.IServices;
 using FinalProject.Core.Models;
 using FinalProject.Service.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,15 +16,18 @@ namespace FinalProject.API.Controllers
     public class TurnController : ControllerBase
     {
         private readonly ITurnService _turnService;
-        public TurnController(ITurnService turnService)
+        private readonly IMapper _mapper;
+
+        public TurnController(ITurnService turnService, IMapper mapper)
         {
             _turnService = turnService;
+            _mapper = mapper;
         }
         // GET: api/<TurnController>
         [HttpGet]
-        public ActionResult Get()
+        public async Task<ActionResult> Get()
         {
-            var turns = _turnService.GetAllTurns();
+            var turns =await _turnService.GetAllTurnsAsync();
             return Ok(turns);
         }
 
@@ -29,22 +36,34 @@ namespace FinalProject.API.Controllers
         public ActionResult Get(int id)
         {
             var turn = _turnService.GetTurn(id);
-            return Ok(turn);
+            var turnDto = _mapper.Map<TurnDTO>(turn);
+            return Ok(turnDto);
         }
 
         // POST api/<UserController>
         [HttpPost]
-        public ActionResult Post([FromBody] Turn value)
+        public async Task<ActionResult> Post([FromBody] TurnPostModel value)
         {
-            var newTurn = _turnService.Add(value);
+            var turnPost = new Turn()
+            {
+                TurnUserId = value.TurnUserId,
+                DoctorCode = value.DoctorCode,
+                DoctorName = value.DoctorName,
+                TurnLocate = value.TurnLocate,
+                Hour = value.Hour,
+                ArrivalConfirmation = value.ArrivalConfirmation,
+                ScheduleId = value.ScheduleId,
+                DateTurn = value.DateTurn
+            };
+            var newTurn = await _turnService.AddAsync(turnPost);
             return Ok(newTurn);
         }
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public ActionResult Put([FromBody] Turn value)
+        public async Task<ActionResult> Put([FromBody] Turn value)
         {
-            var upTurn = _turnService.UpDate(value);
+            var upTurn = await _turnService.UpDateAsync(value);
             return Ok(upTurn);
         }
 

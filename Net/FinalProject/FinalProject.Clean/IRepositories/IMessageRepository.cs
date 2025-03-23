@@ -9,10 +9,10 @@ namespace FinalProject.Core.IRepositories
 {
     public interface IMessageRepository
     {
-        IEnumerable<Message> GetAll();
+        Task<List<Message>> GetAllAsync();
         Message? GetById(int id);
-        Message Add(Message newMessage);
-        Message Update(Message upMessage);
+        Task<Message> AddAsync(Message newMessage);
+        Task<Message> UpdateAsync(Message upMessage);
         void Delete(int id);
     }
 }

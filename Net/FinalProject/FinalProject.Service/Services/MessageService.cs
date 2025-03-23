@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Service.Services
 {
-    public class MessageService:IMessageService
+    public class MessageService : IMessageService
     {
         private readonly IMessageRepository _messageRepository;
         public MessageService(IMessageRepository messageRepository)
@@ -17,9 +17,9 @@ namespace FinalProject.Service.Services
             _messageRepository = messageRepository;
 
         }
-        public IEnumerable<Message> GetAllMessages()
+        public async Task<List<Message>> GetAllMessagesAsync()
         {
-            return _messageRepository.GetAll();
+            return await _messageRepository.GetAllAsync();
         }
 
         public Message? GetMessage(int id)
@@ -27,13 +27,13 @@ namespace FinalProject.Service.Services
             return _messageRepository.GetById(id);
         }
 
-        public Message Add(Message mes)
+        public async Task<Message> AddAsync(Message mes)
         {
-            return _messageRepository.Add(mes);
+            return await _messageRepository.AddAsync(mes);
         }
-        public Message UpDate(Message mes)
+        public async Task<Message> UpDateAsync(Message mes)
         {
-            return _messageRepository.Update(mes);
+            return await _messageRepository.UpdateAsync(mes);
         }
 
         public void Delete(int id)

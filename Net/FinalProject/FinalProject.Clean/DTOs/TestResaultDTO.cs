@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject.Core.Models
+namespace FinalProject.Core.DTOs
 {
-    public class TestResualt
+    public class TestResaultDTO
     {
-        [Key]
         public int TestId { get; set; }
         public DateTime TestDate { get; set; }
         public string ImageUrl { get; set; }

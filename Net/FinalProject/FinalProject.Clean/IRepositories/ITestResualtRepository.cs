@@ -9,10 +9,10 @@ namespace FinalProject.Core.IRepositories
 {
     public interface ITestResualtRepository
     {
-        IEnumerable<TestResualt> GetAll();
+        Task<List<TestResualt>> GetAllAsync();
         TestResualt? GetById(int id);
-        TestResualt Add(TestResualt newTestResault);
-        TestResualt Update(TestResualt upTestResault);
+        Task<TestResualt> AddAsync(TestResualt newTestResault);
+        Task<TestResualt> UpdateAsync(TestResualt upTestResault);
         void Delete(int id);
     }
 }

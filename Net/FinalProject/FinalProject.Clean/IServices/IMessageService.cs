@@ -10,10 +10,10 @@ namespace FinalProject.Core.IServices
 {
     public interface IMessageService
     {
-        IEnumerable<Message> GetAllMessages();
+        Task<List<Message>> GetAllMessagesAsync();
         Message? GetMessage(int id);
-        Message Add(Message mes);
-        Message UpDate(Message mes);
+        Task<Message> AddAsync(Message mes);
+        Task<Message> UpDateAsync(Message mes);
         void Delete(int id);
     }
 }

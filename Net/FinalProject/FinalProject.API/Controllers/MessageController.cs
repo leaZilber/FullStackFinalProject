@@ -1,4 +1,7 @@
-﻿using FinalProject.Core.IServices;
+﻿using AutoMapper;
+using FinalProject.Core;
+using FinalProject.Core.DTOs;
+using FinalProject.Core.IServices;
 using FinalProject.Core.Models;
 using FinalProject.Service.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,15 +15,18 @@ namespace FinalProject.API.Controllers
     public class MessageController : ControllerBase
     {
         private readonly IMessageService _messageService;
-        public MessageController(IMessageService messageService)
+        private readonly IMapper _mapper;
+
+        public MessageController(IMessageService messageService, IMapper mapper)
         {
             _messageService = messageService;
+            _mapper = mapper;
         }
         // GET: api/<MessageController>
         [HttpGet]
-        public ActionResult Get()
+        public async Task<ActionResult> Get()
         {
-            var messages = _messageService.GetAllMessages();
+            var messages =await _messageService.GetAllMessagesAsync();
             return Ok(messages);
         }
 
@@ -29,22 +35,23 @@ namespace FinalProject.API.Controllers
         public ActionResult Get(int id)
         {
             var message = _messageService.GetMessage(id);
-            return Ok(message);
+            var messageDto = _mapper.Map<MessageDTO>(message);
+            return Ok(messageDto);
         }
 
         // POST api/<UserController>
         [HttpPost]
-        public ActionResult Post([FromBody] Message value)
+        public async Task<ActionResult> Post([FromBody] Message value)
         {
-            var newMessage = _messageService.Add(value);
+            var newMessage = await _messageService.AddAsync(value);
             return Ok(newMessage);
         }
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public ActionResult Put([FromBody] Message value)
+        public async Task<ActionResult> Put([FromBody] Message value)
         {
-            var upMessage = _messageService.UpDate(value);
+            var upMessage = await _messageService.UpDateAsync(value);
             return Ok(upMessage);
         }
 

@@ -10,10 +10,10 @@ namespace FinalProject.Core.IServices
 {
     public interface IUserService
     {
-        IEnumerable<User> GetAllUsers();
+        Task<List<User>> GetAllUsersAsync();
         User? GetUser(int id);
-        User Add(User user);
-        User UpDate(User user);
+        Task<User> AddAsync(User user);
+        Task<User> UpDateAsync(User user);
         void Delete(int id);
     }
 }

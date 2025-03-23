@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Data.Repositories
 {
-    public class ScheduleRepositiory:IScheduleRepository
+    public class ScheduleRepositiory : IScheduleRepository
     {
         private readonly DataContext _context;
         public ScheduleRepositiory(DataContext context)
         {
             _context = context;
         }
-        public IEnumerable<Schedule> GetAll()
+        public async Task<List<Schedule>> GetAllAsync()
         {
-            return _context.scheduleList.Include(s=>s.doctor);
+            return await _context.scheduleList.Include(u => u.turns).ToListAsync();
         }
 
         public Schedule? GetById(int id)
@@ -26,14 +26,14 @@ namespace FinalProject.Data.Repositories
             return _context.scheduleList.FirstOrDefault(item => item.ScheduleId == id);
         }
 
-        public Schedule Add(Schedule newTestResault)
+        public async Task<Schedule> AddAsync(Schedule newTestResault)
         {
             _context.scheduleList.Add(newTestResault);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return newTestResault;
         }
 
-        public Schedule Update(Schedule upSchedule)
+        public async Task<Schedule> UpdateAsync(Schedule upSchedule)
         {
             var isExist = GetById(upSchedule.ScheduleId);
             if (isExist is null)
@@ -42,7 +42,7 @@ namespace FinalProject.Data.Repositories
             }
             _context.scheduleList.Remove(isExist);
             _context.scheduleList.Add(isExist);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return isExist;
         }
 

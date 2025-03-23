@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Service.Services
 {
-    public class ScheduleService:IScheduleService
+    public class ScheduleService : IScheduleService
     {
         private readonly IScheduleRepository _scheduleRepository;
         public ScheduleService(IScheduleRepository scheduleRepository)
         {
             _scheduleRepository = scheduleRepository;
         }
-        public IEnumerable<Schedule> GetAllSchedules()
+        public async Task<List<Schedule>> GetAllSchedulesAsync()
         {
-            return _scheduleRepository.GetAll();
+            return await _scheduleRepository.GetAllAsync();
         }
 
         public Schedule? GetSchedule(int id)
@@ -26,13 +26,13 @@ namespace FinalProject.Service.Services
             return _scheduleRepository.GetById(id);
         }
 
-        public Schedule Add(Schedule sched)
+        public async Task<Schedule> AddAsync(Schedule sched)
         {
-            return _scheduleRepository.Add(sched);
+            return await _scheduleRepository.AddAsync(sched);
         }
-        public Schedule UpDate(Schedule user)
+        public async Task<Schedule> UpDateAsync(Schedule user)
         {
-            return _scheduleRepository.Update(user);
+            return await _scheduleRepository.UpdateAsync(user);
         }
 
         public void Delete(int id)

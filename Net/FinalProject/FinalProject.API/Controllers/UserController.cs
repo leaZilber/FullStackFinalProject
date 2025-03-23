@@ -1,4 +1,8 @@
-﻿using FinalProject.Core.IServices;
+﻿using AutoMapper;
+using FinalProject.API.Models;
+using FinalProject.Core;
+using FinalProject.Core.DTOs;
+using FinalProject.Core.IServices;
 using FinalProject.Core.Models;
 using FinalProject.Service.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,16 +16,18 @@ namespace FinalProject.API.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
         // GET: api/<UserController>
         [HttpGet]
-        public ActionResult Get()
+        public async Task<ActionResult> Get()
         {
-            var users = _userService.GetAllUsers();
+            var users =await _userService.GetAllUsersAsync();
             return Ok(users);
         }
 
@@ -29,23 +35,37 @@ namespace FinalProject.API.Controllers
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
+
             var user = _userService.GetUser(id);
-            return Ok(user);
+            var userDto = _mapper.Map<UserDTO>(user);
+            return Ok(userDto);
         }
 
         // POST api/<UserController>
         [HttpPost]
-        public ActionResult Post([FromBody] User value)
+        public async Task<ActionResult> Post([FromBody] UserPostModel value)
         {
-            var newUser = _userService.Add(value);
+            var userPost = new User()
+            {
+                UserName = value.UserName,
+                UserEmail = value.UserEmail,
+                UserEncryptedPassword = value.UserEncryptedPassword,
+                UserPhone = value.UserPhone,
+                UserAddress = value.UserAddress,
+                UserBirth = value.UserBirth,
+                UserRole = value.UserRole,
+                UserCreateDate = value.UserCreateDate,
+                UserUpdateDate = value.UserUpdateDate,
+            };
+            var newUser = await _userService.AddAsync(userPost);
             return Ok(newUser);
         }
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public ActionResult Put([FromBody] User value)
+        public async Task<ActionResult> Put([FromBody] User value)
         {
-            var upUser = _userService.UpDate(value);
+            var upUser = await _userService.UpDateAsync(value);
             return Ok(upUser);
 
         }

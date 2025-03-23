@@ -9,10 +9,10 @@ namespace FinalProject.Core.IRepositories
 {
     public interface IDoctorRepository
     {
-        IEnumerable<Doctor> GetAll();
+        Task<List<Doctor>> GetAllAsync();
         Doctor? GetById(int id);
-        Doctor Add(Doctor newDoctor);
-        Doctor Update(Doctor upDoctor);
+        Task<Doctor> AddAsync(Doctor newDoctor);
+        Task<Doctor> UpdateAsync(Doctor upDoctor);
         void Delete(int id);
     }
 }

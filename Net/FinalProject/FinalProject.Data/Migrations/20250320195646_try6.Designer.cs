@@ -4,6 +4,7 @@ using FinalProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250320195646_try6")]
+    partial class try6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,7 +154,7 @@ namespace FinalProject.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ScheduleId")
+                    b.Property<int?>("ScheduleId")
                         .HasColumnType("int");
 
                     b.Property<string>("TurnLocate")
@@ -248,9 +251,7 @@ namespace FinalProject.Data.Migrations
                 {
                     b.HasOne("FinalProject.Core.Models.Schedule", null)
                         .WithMany("turns")
-                        .HasForeignKey("ScheduleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ScheduleId");
 
                     b.HasOne("FinalProject.Core.Models.User", null)
                         .WithMany("Turns")

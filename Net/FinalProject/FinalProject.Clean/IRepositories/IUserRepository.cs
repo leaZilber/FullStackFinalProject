@@ -9,10 +9,10 @@ namespace FinalProject.Core.IRepositories
 {
     public interface IUserRepository
     {
-        IEnumerable<User> GetAll();
+        Task<List<User>> GetAllAsync();
         User GetById(int id);
-        User Add(User newUser);
-        User Update(User upUser);
+        Task<User> AddAsync(User newUser);
+        Task<User> UpdateAsync(User upUser);
         void Delete(int id);
     }
 }

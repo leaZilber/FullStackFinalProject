@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Service.Services
 {
-    public class TurnService:ITurnService
+    public class TurnService : ITurnService
     {
         private readonly ITurnRepository _turnRepository;
         public TurnService(ITurnRepository turnRepository)
         {
             _turnRepository = turnRepository;
         }
-        public IEnumerable<Turn> GetAllTurns()
+        public async Task<List<Turn>> GetAllTurnsAsync()
         {
-            return _turnRepository.GetAll();
+            return await _turnRepository.GetAllAsync();
         }
 
         public Turn? GetTurn(int id)
@@ -26,13 +26,13 @@ namespace FinalProject.Service.Services
             return _turnRepository.GetById(id);
         }
 
-        public Turn Add(Turn turn)
+        public async Task<Turn> AddAsync(Turn turn)
         {
-            return _turnRepository.Add(turn);
+            return await _turnRepository.AddAsync(turn);
         }
-        public Turn UpDate(Turn turn)
+        public async Task<Turn> UpDateAsync(Turn turn)
         {
-            return _turnRepository.Update(turn);
+            return await _turnRepository.UpdateAsync(turn);
         }
 
         public void Delete(int id)

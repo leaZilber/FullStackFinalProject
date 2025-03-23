@@ -10,10 +10,10 @@ namespace FinalProject.Core.IServices
 {
     public interface IDoctorService
     {
-        IEnumerable<Doctor> GetAllDoctors();
+        Task<List<Doctor>> GetAllDoctorsAsync();
         Doctor? GetDoctor(int id);
-        Doctor Add(Doctor doctor);
-        Doctor UpDate(Doctor doctor);
+        Task<Doctor> AddAsync(Doctor doctor);
+        Task<Doctor> UpDateAsync(Doctor doctor);
         void Delete(int id);
     }
 }

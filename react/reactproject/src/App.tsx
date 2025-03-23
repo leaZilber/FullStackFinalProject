@@ -3,12 +3,12 @@ import './App.css'
 import { Doctor } from './models/doctor';
 import { Schedule } from './models/schedule';
 import { Turn } from './models/turn';
-import { AboutUs } from './components/aboutUs'
+// import { AboutUs } from './components/aboutUs'
 // import { InformationPage } from './components/information'
 // import LoginComp from './homeComponents/login'
 // import RegisterComp from './homeComponents/register'
 // import { HomePage } from './components/homePage'
-// import { CheckPicture } from './components/checkPictu'
+import { CheckPicture } from './components/checkPictu'
 
 function App() {
   const doctorsArr: Doctor[] = [//להחליף לקריאת API
@@ -69,8 +69,8 @@ function App() {
   return (
     <>
       {/* <Schedule1 doctors={doctorsArr} /> */}
-      {/* <CheckPicture/> */}
-      <AboutUs/>
+      <CheckPicture/>
+      {/* <AboutUs/> */}
       {/* <InformationPage/> */}
       {/* <HomePage /> */}
     </>

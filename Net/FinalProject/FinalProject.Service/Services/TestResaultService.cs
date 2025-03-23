@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Service.Services
 {
-    public class TestResaultService:ITestResualtService
+    public class TestResaultService : ITestResualtService
     {
         private readonly ITestResualtRepository _testResaultRepository;
         public TestResaultService(ITestResualtRepository testResaultRepository)
         {
             _testResaultRepository = testResaultRepository;
         }
-        public IEnumerable<TestResualt> GetAllTestResualt()
+        public async Task<List<TestResualt>> GetAllTestResualtAsync()
         {
-            return _testResaultRepository.GetAll();
+            return await _testResaultRepository.GetAllAsync();
         }
 
         public TestResualt? GetTestResualt(int id)
@@ -26,13 +26,13 @@ namespace FinalProject.Service.Services
             return _testResaultRepository.GetById(id);
         }
 
-        public TestResualt Add(TestResualt test)
+        public async Task<TestResualt> AddAsync(TestResualt test)
         {
-            return _testResaultRepository.Add(test);
+            return await _testResaultRepository.AddAsync(test);
         }
-        public TestResualt UpDate(TestResualt test)
+        public async Task<TestResualt> UpDateAsync(TestResualt test)
         {
-            return _testResaultRepository.Update(test);
+            return await _testResaultRepository.UpdateAsync(test);
         }
 
         public void Delete(int id)

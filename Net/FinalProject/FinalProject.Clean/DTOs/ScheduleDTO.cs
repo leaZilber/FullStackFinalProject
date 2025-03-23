@@ -1,17 +1,16 @@
-﻿using System;
+﻿using FinalProject.Core.Models;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject.Core.Models
+namespace FinalProject.Core.DTOs
 {
-    public class Schedule
+    public class ScheduleDTO
     {
-        [Key]
         public int ScheduleId { get; set; }
         public int CodeD { get; set; }
-        public List<Turn> turns { get; set; }= new List<Turn>();
+        public List<Turn> turns { get; set; } = new List<Turn>();
     }
 }

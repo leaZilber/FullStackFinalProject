@@ -10,10 +10,10 @@ namespace FinalProject.Core.IServices
 {
     public interface ITurnService
     {
-        IEnumerable<Turn> GetAllTurns();
+        Task<List<Turn>> GetAllTurnsAsync();
         Turn? GetTurn(int id);
-        Turn Add(Turn turn);
-        Turn UpDate(Turn turn);
+        Task<Turn> AddAsync(Turn turn);
+        Task<Turn> UpDateAsync(Turn turn);
         void Delete(int id);
     }
 }

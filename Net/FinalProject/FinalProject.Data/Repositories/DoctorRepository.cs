@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Data.Repositories
 {
-    public class DoctorRepository:IDoctorRepository
+    public class DoctorRepository : IDoctorRepository
     {
         private readonly DataContext _context;
         public DoctorRepository(DataContext context)
         {
             _context = context;
         }
-        public IEnumerable<Doctor> GetAll()
+        public async Task<List<Doctor>> GetAllAsync()
         {
-            return _context.doctorList.Include(d=>d.DoctorSchedule);
+            return await _context.doctorList.ToListAsync();
         }
 
         public Doctor? GetById(int id)
@@ -26,14 +26,14 @@ namespace FinalProject.Data.Repositories
             return _context.doctorList.FirstOrDefault(item => item.DoctorCode == id);
         }
 
-        public Doctor Add(Doctor newDoctor)
+        public async Task<Doctor> AddAsync(Doctor newDoctor)
         {
             _context.doctorList.Add(newDoctor);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return newDoctor;
         }
 
-        public Doctor Update(Doctor upDoctor)
+        public async Task<Doctor> UpdateAsync(Doctor upDoctor)
         {
             var isExist = GetById(upDoctor.DoctorCode);
             if (isExist is null)
@@ -42,7 +42,7 @@ namespace FinalProject.Data.Repositories
             }
             _context.doctorList.Remove(isExist);
             _context.doctorList.Add(isExist);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return isExist;
         }
 

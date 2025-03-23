@@ -1,4 +1,8 @@
-﻿using FinalProject.Core.IServices;
+﻿using AutoMapper;
+using FinalProject.API.Models;
+using FinalProject.Core;
+using FinalProject.Core.DTOs;
+using FinalProject.Core.IServices;
 using FinalProject.Core.Models;
 using FinalProject.Service.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,15 +16,18 @@ namespace FinalProject.API.Controllers
     public class ScheduleController : ControllerBase
     {
         private readonly IScheduleService _scheduleService;
-        public ScheduleController(IScheduleService scheduleService)
+        private readonly IMapper _mapper;
+
+        public ScheduleController(IScheduleService scheduleService, IMapper mapper)
         {
             _scheduleService = scheduleService;
+            _mapper = mapper;
         }
         // GET: api/<ScheduleController>
         [HttpGet]
-        public ActionResult Get()
+        public async Task<ActionResult> Get()
         {
-            var sched = _scheduleService.GetAllSchedules();
+            var sched = await _scheduleService.GetAllSchedulesAsync();
             return Ok(sched);
         }
 
@@ -29,22 +36,27 @@ namespace FinalProject.API.Controllers
         public ActionResult Get(int id)
         {
             var sched = _scheduleService.GetSchedule(id);
-            return Ok(sched);
+            var scheduleDto = _mapper.Map<ScheduleDTO>(sched);
+            return Ok(scheduleDto);
         }
 
         // POST api/<UserController>
         [HttpPost]
-        public ActionResult Post([FromBody] Schedule value)
+        public async Task<ActionResult> Post([FromBody] SchedulePostModel value)
         {
-            var newSchedule = _scheduleService.Add(value);
+            var schedulePost = new Schedule()
+            {
+                CodeD = value.CodeD
+            };
+            var newSchedule = await _scheduleService.AddAsync(schedulePost);
             return Ok(newSchedule);
         }
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public ActionResult Put([FromBody] Schedule value)
+        public async Task<ActionResult> Put([FromBody] Schedule value)
         {
-            var upSchedule = _scheduleService.UpDate(value);
+            var upSchedule = await _scheduleService.UpDateAsync(value);
             return Ok(upSchedule);
         }
 

@@ -16,9 +16,9 @@ namespace FinalProject.Data.Repositories
         {
             _context = context;
         }
-        public IEnumerable<User> GetAll()
+        public async Task<List<User>> GetAllAsync()
         {
-            return _context.userList.Include(u=>u.turns);
+            return await _context.userList.ToListAsync();
         }
 
         public User? GetById(int id)
@@ -26,14 +26,14 @@ namespace FinalProject.Data.Repositories
             return _context.userList.FirstOrDefault(item => item.UserId == id);
         }
 
-        public User Add(User newUser)
+        public async Task<User> AddAsync(User newUser)
         {
             _context.userList.Add(newUser);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return newUser;
         }
 
-        public User Update(User upUser)
+        public async Task<User> UpdateAsync(User upUser)
         {
             var isExist = GetById(upUser.UserId);
             if (isExist is null)
@@ -42,7 +42,7 @@ namespace FinalProject.Data.Repositories
             }
             _context.userList.Remove(isExist);
             _context.userList.Add(isExist);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return isExist;
         }
 

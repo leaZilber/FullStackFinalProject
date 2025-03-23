@@ -16,9 +16,9 @@ namespace FinalProject.Data.Repositories
         {
             _context = context;
         }
-        public IEnumerable<Message> GetAll()
+        public async Task<List<Message>> GetAllAsync()
         {
-            return _context.messagesList.Include(m=>m.User);
+            return await _context.messagesList.ToListAsync();
         }
 
         public Message? GetById(int id)
@@ -26,14 +26,14 @@ namespace FinalProject.Data.Repositories
             return _context.messagesList.FirstOrDefault(item => item.MessageId == id);
         }
 
-        public Message Add(Message newMessage)
+        public async Task<Message> AddAsync(Message newMessage)
         {
             _context.messagesList.Add(newMessage);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return newMessage;
         }
 
-        public Message Update(Message upMessage)
+        public async Task<Message> UpdateAsync(Message upMessage)
         {
             var isExist = GetById(upMessage.MessageId);
             if (isExist is null)
@@ -42,7 +42,7 @@ namespace FinalProject.Data.Repositories
             }
             _context.messagesList.Remove(isExist);
             _context.messagesList.Add(isExist);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return isExist;
         }
 

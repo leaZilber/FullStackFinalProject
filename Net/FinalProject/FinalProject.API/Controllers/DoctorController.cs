@@ -1,4 +1,8 @@
-﻿using FinalProject.Core.IServices;
+﻿using AutoMapper;
+using FinalProject.API.Models;
+using FinalProject.Core;
+using FinalProject.Core.DTOs;
+using FinalProject.Core.IServices;
 using FinalProject.Core.Models;
 using FinalProject.Service.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,16 +16,19 @@ namespace FinalProject.API.Controllers
     public class DoctorController : ControllerBase
     {
         private readonly IDoctorService _doctorService;
-        public DoctorController(IDoctorService doctorService)
+        private readonly IMapper _mapper;
+
+        public DoctorController(IDoctorService doctorService, IMapper mapper)
         {
             _doctorService = doctorService;
+            _mapper = mapper;
         }
 
         // GET: api/<DoctorController>
         [HttpGet]
-        public ActionResult Get()
+        public async Task<ActionResult> Get()
         {
-            var doctors = _doctorService.GetAllDoctors();
+            var doctors = await _doctorService.GetAllDoctorsAsync();
             return Ok(doctors);
         }
 
@@ -30,22 +37,29 @@ namespace FinalProject.API.Controllers
         public ActionResult Get(int id)
         {
             var doctor = _doctorService.GetDoctor(id);
-            return Ok(doctor);
+            var doctorDto = _mapper.Map<DoctorDTO>(doctor);
+            return Ok(doctorDto);
         }
 
         // POST api/<UserController>
         [HttpPost]
-        public ActionResult Post([FromBody] Doctor value)
+        public async Task<ActionResult> Post([FromBody] DoctorPostModel value)
         {
-            var newDoctor = _doctorService.Add(value);
+            var doctorPost = new Doctor()
+            {
+
+                FieldOfSpecialization = value.FieldOfSpecialization,
+                LicenseNumber = value.LicenseNumber,
+            };
+            var newDoctor = await _doctorService.AddAsync(doctorPost);
             return Ok(newDoctor);
         }
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public ActionResult Put([FromBody] Doctor value)
+        public async Task<ActionResult> Put([FromBody] Doctor value)
         {
-            var upDoctor = _doctorService.UpDate(value);
+            var upDoctor = await _doctorService.UpDateAsync(value);
             return Ok(upDoctor);
         }
 

@@ -1,16 +1,15 @@
-﻿using System;
+﻿using FinalProject.Core.Models;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject.Core.Models
+namespace FinalProject.Core.DTOs
 {
-    public class Turn
+    public class TurnDTO
     {
-        [Key]
         public int TurnId { get; set; }
         public int TurnUserId { get; set; }
         public string DoctorName { get; set; }
@@ -19,8 +18,5 @@ namespace FinalProject.Core.Models
         public string TurnLocate { get; set; }
         public string Hour { get; set; }
         public bool ArrivalConfirmation { get; set; }
-        public int ScheduleId { get; set; }
-        [ForeignKey("ScheduleId")]
-        public Schedule Schedule { get; set; }
     }
 }

@@ -1,4 +1,7 @@
-﻿using FinalProject.Core.IServices;
+﻿using AutoMapper;
+using FinalProject.Core;
+using FinalProject.Core.DTOs;
+using FinalProject.Core.IServices;
 using FinalProject.Core.Models;
 using FinalProject.Service.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,15 +15,18 @@ namespace FinalProject.API.Controllers
     public class TestResualtController : ControllerBase
     {
         private readonly ITestResualtService _testResualtService;
-        public TestResualtController(ITestResualtService testResualtService)
+        private readonly IMapper _mapper;
+
+        public TestResualtController(ITestResualtService testResualtService, IMapper mapper)
         {
             _testResualtService = testResualtService;
+            _mapper = mapper;
         }
         // GET: api/<TestResualtController>
         [HttpGet]
-        public ActionResult Get()
+        public async Task<ActionResult> Get()
         {
-            var testResualts = _testResualtService.GetAllTestResualt();
+            var testResualts = await _testResualtService.GetAllTestResualtAsync();
             return Ok(testResualts);
         }
 
@@ -29,22 +35,23 @@ namespace FinalProject.API.Controllers
         public ActionResult Get(int id)
         {
             var test = _testResualtService.GetTestResualt(id);
-            return Ok(test);
+            var testDto = _mapper.Map<TestResaultDTO>(test);
+            return Ok(testDto);
         }
 
         // POST api/<UserController>
         [HttpPost]
-        public ActionResult Post([FromBody] TestResualt value)
+        public async Task<ActionResult> Post([FromBody] TestResualt value)
         {
-            var newTestResault = _testResualtService.Add(value);
+            var newTestResault = await _testResualtService.AddAsync(value);
             return Ok(newTestResault);
         }
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public ActionResult Put([FromBody] TestResualt value)
+        public async Task<ActionResult> Put([FromBody] TestResualt value)
         {
-            var upTest = _testResualtService.UpDate(value);
+            var upTest = await _testResualtService.UpDateAsync(value);
             return Ok(upTest);
         }
 

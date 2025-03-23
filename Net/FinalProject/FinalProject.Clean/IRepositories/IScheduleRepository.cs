@@ -10,10 +10,10 @@ namespace FinalProject.Core.IRepositories
     public interface IScheduleRepository
     {
 
-        IEnumerable<Schedule> GetAll();
+        Task<List<Schedule>> GetAllAsync();
         Schedule? GetById(int id);
-        Schedule Add(Schedule newTestResault);
-        Schedule Update(Schedule upSchedule);
+        Task<Schedule> AddAsync(Schedule newTestResault);
+        Task<Schedule> UpdateAsync(Schedule upSchedule);
         void Delete(int id);
     }
 }

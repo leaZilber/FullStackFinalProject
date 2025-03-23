@@ -10,10 +10,10 @@ namespace FinalProject.Core.IServices
 {
     public interface ITestResualtService
     {
-        IEnumerable<TestResualt> GetAllTestResualt();
+        Task<List<TestResualt>> GetAllTestResualtAsync();
         TestResualt? GetTestResualt(int id);
-        TestResualt Add(TestResualt test);
-        TestResualt UpDate(TestResualt test);
+        Task<TestResualt> AddAsync(TestResualt test);
+        Task<TestResualt> UpDateAsync(TestResualt test);
         void Delete(int id);
     }
 }

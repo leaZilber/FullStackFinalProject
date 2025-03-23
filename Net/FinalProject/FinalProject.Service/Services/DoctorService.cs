@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Service.Services
 {
-    public class DoctorService:IDoctorService
+    public class DoctorService : IDoctorService
     {
         private readonly IDoctorRepository _doctorRepository;
         public DoctorService(IDoctorRepository doctorRepository)
         {
             _doctorRepository = doctorRepository;
         }
-        public IEnumerable<Doctor> GetAllDoctors()
+        public async Task<List<Doctor>> GetAllDoctorsAsync()
         {
-            return _doctorRepository.GetAll();
+            return await _doctorRepository.GetAllAsync();
         }
 
         public Doctor? GetDoctor(int id)
@@ -26,13 +26,13 @@ namespace FinalProject.Service.Services
             return _doctorRepository.GetById(id);
         }
 
-        public Doctor Add(Doctor doctor)
+        public async Task<Doctor> AddAsync(Doctor doctor)
         {
-            return _doctorRepository.Add(doctor);
+            return await _doctorRepository.AddAsync(doctor);
         }
-        public Doctor UpDate(Doctor doctor)
+        public async Task<Doctor> UpDateAsync(Doctor doctor)
         {
-            return _doctorRepository.Update(doctor);
+            return await _doctorRepository.UpdateAsync(doctor);
         }
 
         public void Delete(int id)

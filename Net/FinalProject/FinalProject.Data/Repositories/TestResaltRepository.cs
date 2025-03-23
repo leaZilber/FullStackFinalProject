@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Data.Repositories
 {
-    public class TestResaltRepository:ITestResualtRepository
+    public class TestResaltRepository : ITestResualtRepository
     {
         private readonly DataContext _context;
         public TestResaltRepository(DataContext context)
         {
             _context = context;
         }
-        public IEnumerable<TestResualt> GetAll()
+        public async Task<List<TestResualt>> GetAllAsync()
         {
-            return _context.testResaultList.Include(t => t.User);
+            return await _context.testResaultList.ToListAsync();
         }
 
         public TestResualt? GetById(int id)
@@ -26,14 +26,14 @@ namespace FinalProject.Data.Repositories
             return _context.testResaultList.FirstOrDefault(item => item.TestId == id);
         }
 
-        public TestResualt Add(TestResualt newTestResault)
+        public async Task<TestResualt> AddAsync(TestResualt newTestResault)
         {
             _context.testResaultList.Add(newTestResault);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return newTestResault;
         }
 
-        public TestResualt Update(TestResualt upTestResault)
+        public async Task<TestResualt> UpdateAsync(TestResualt upTestResault)
         {
             var isExist = GetById(upTestResault.TestId);
             if (isExist is null)
@@ -42,7 +42,7 @@ namespace FinalProject.Data.Repositories
             }
             _context.testResaultList.Remove(isExist);
             _context.testResaultList.Add(isExist);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return isExist;
         }
 

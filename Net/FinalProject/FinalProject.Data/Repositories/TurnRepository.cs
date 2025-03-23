@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Data.Repositories
 {
-    public class TurnRepository:ITurnRepository
+    public class TurnRepository : ITurnRepository
     {
         private readonly DataContext _context;
         public TurnRepository(DataContext context)
         {
             _context = context;
         }
-        public IEnumerable<Turn> GetAll()
+        public async Task<List<Turn>> GetAllAsync()
         {
-            return _context.turnList.Include(t=>t.User);
+            return await _context.turnList.ToListAsync();
         }
 
         public Turn? GetById(int id)
@@ -26,14 +26,14 @@ namespace FinalProject.Data.Repositories
             return _context.turnList.FirstOrDefault(item => item.TurnId == id);
         }
 
-        public Turn Add(Turn newTurn)
+        public async Task<Turn> AddAsync(Turn newTurn)
         {
             _context.turnList.Add(newTurn);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return newTurn;
         }
 
-        public Turn Update(Turn upTurn)
+        public async Task<Turn> UpdateAsync(Turn upTurn)
         {
             var isExist = GetById(upTurn.TurnId);
             if (isExist is null)
@@ -42,7 +42,7 @@ namespace FinalProject.Data.Repositories
             }
             _context.turnList.Remove(isExist);
             _context.turnList.Add(isExist);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return isExist;
         }
 

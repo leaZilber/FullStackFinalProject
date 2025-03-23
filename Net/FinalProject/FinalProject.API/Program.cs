@@ -1,3 +1,4 @@
+using FinalProject.Core;
 using FinalProject.Core.IRepositories;
 using FinalProject.Core.IServices;
 using FinalProject.Data;
@@ -35,7 +36,12 @@ builder.Services.AddScoped<ITurnRepository, TurnRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+/*לבדוק למה ההתקנות לא עובדות ולהתקין את הזריקת תלויות*/
+//builder.Services.AddSingleton<Mapping>();
+
 builder.Services.AddDbContext<DataContext>();
+
 builder.Services.AddControllers();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
@@ -44,7 +50,6 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.WriteIndented = true;
 });
 
-//builder.Services.AddSingleton<DataContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

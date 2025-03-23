@@ -16,9 +16,9 @@ namespace FinalProject.Service.Services
         {
             _userRepository = userRepository;
         }
-        public IEnumerable<User> GetAllUsers()
+        public async Task<List<User>> GetAllUsersAsync()
         {
-            return _userRepository.GetAll();
+            return await _userRepository.GetAllAsync();
         }
 
         public User? GetUser(int id)
@@ -26,13 +26,13 @@ namespace FinalProject.Service.Services
             return _userRepository.GetById(id);
         }
 
-        public User Add(User user)
+        public async Task<User> AddAsync(User user)
         {
-            return _userRepository.Add(user);
+            return await _userRepository.AddAsync(user);
         }
-        public User UpDate(User user)
+        public async Task<User> UpDateAsync(User user)
         {
-            return _userRepository.Update(user);
+            return await _userRepository.UpdateAsync(user);
         }
 
         public void Delete(int id)
