@@ -11,7 +11,7 @@ namespace FinalProject.Core.Models
     {
         [Key]
         public int ScheduleId { get; set; }
-        public int CodeD { get; set; }
-        public List<Turn> turns { get; set; }= new List<Turn>();
+        public string DoctorName { get; set; }
+        public List<Turn> turns { get; set; } = new List<Turn>();
     }
 }

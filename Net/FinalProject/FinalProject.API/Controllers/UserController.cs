@@ -47,6 +47,7 @@ namespace FinalProject.API.Controllers
         {
             var userPost = new User()
             {
+                UserId = value.UserId,
                 UserName = value.UserName,
                 UserEmail = value.UserEmail,
                 UserEncryptedPassword = value.UserEncryptedPassword,

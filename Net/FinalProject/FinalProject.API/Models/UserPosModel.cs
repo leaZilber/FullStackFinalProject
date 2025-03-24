@@ -4,6 +4,7 @@ namespace FinalProject.API.Models
 {
     public class UserPostModel
     {
+        public int UserId { get; set; }
         public string UserName { get; set; }
         public string UserEmail { get; set; }
         public string UserEncryptedPassword { get; set; }

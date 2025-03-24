@@ -13,7 +13,7 @@ const LoginComp = () => {
     setLoginError(""); // Reset error
     setLoading(true);  // Start loading
     try {
-      const response = await axios.post("http://localhost:5000/api/user/login", {//להכניס api נכון
+      const response = await axios.post("https://localhost:7245/api/Auth", {
         ID: data?.id,
         Password: data?.password
       });
@@ -60,8 +60,8 @@ const LoginComp = () => {
             rules={{
               required: "ID is required",
               pattern: {
-                value: /^[0-9]{9}$/,
-                message: "ID must be exactly 9 digits"
+                value: /^[0-9]{7,9}$/,
+                message: "ID must be until 9 digits"
               }
             }}
             render={({ field }) => (

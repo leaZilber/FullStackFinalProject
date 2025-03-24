@@ -46,7 +46,9 @@ namespace FinalProject.API.Controllers
         {
             var schedulePost = new Schedule()
             {
-                CodeD = value.CodeD
+                DoctorName = value.DoctorName,
+                //turns = value.turns,
+                ScheduleId=value.ScheduleId,
             };
             var newSchedule = await _scheduleService.AddAsync(schedulePost);
             return Ok(newSchedule);

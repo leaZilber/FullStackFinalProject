@@ -15,7 +15,6 @@ namespace FinalProject.Service.Services
         public MessageService(IMessageRepository messageRepository)
         {
             _messageRepository = messageRepository;
-
         }
         public async Task<List<Message>> GetAllMessagesAsync()
         {
@@ -31,6 +30,7 @@ namespace FinalProject.Service.Services
         {
             return await _messageRepository.AddAsync(mes);
         }
+
         public async Task<Message> UpDateAsync(Message mes)
         {
             return await _messageRepository.UpdateAsync(mes);

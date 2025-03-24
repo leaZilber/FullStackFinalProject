@@ -10,7 +10,7 @@ namespace FinalProject.Core.DTOs
     public class ScheduleDTO
     {
         public int ScheduleId { get; set; }
-        public int CodeD { get; set; }
+        public int DoctorName { get; set; }
         public List<Turn> turns { get; set; } = new List<Turn>();
     }
 }

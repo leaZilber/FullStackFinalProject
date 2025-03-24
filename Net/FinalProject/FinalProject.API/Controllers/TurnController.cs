@@ -4,6 +4,7 @@ using FinalProject.Core;
 using FinalProject.Core.DTOs;
 using FinalProject.Core.IServices;
 using FinalProject.Core.Models;
+using FinalProject.Data;
 using FinalProject.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,7 +28,7 @@ namespace FinalProject.API.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            var turns =await _turnService.GetAllTurnsAsync();
+            var turns = await _turnService.GetAllTurnsAsync();
             return Ok(turns);
         }
 
@@ -42,21 +43,41 @@ namespace FinalProject.API.Controllers
 
         // POST api/<UserController>
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] TurnPostModel value)
+        public async Task<IActionResult> Post([FromBody] TurnDTO newTurn)
         {
-            var turnPost = new Turn()
+            if (newTurn == null)
             {
-                TurnUserId = value.TurnUserId,
-                DoctorCode = value.DoctorCode,
-                DoctorName = value.DoctorName,
-                TurnLocate = value.TurnLocate,
-                Hour = value.Hour,
-                ArrivalConfirmation = value.ArrivalConfirmation,
-                ScheduleId = value.ScheduleId,
-                DateTurn = value.DateTurn
-            };
-            var newTurn = await _turnService.AddAsync(turnPost);
-            return Ok(newTurn);
+                return BadRequest("❌ נתוני התור חסרים.");
+            }
+
+            using (var context = new DataContext())
+            {
+                // 🔍 חיפוש ה-Schedule המתאים לפי שם הרופא
+                var schedule = context.scheduleList
+                    .FirstOrDefault(s => s.DoctorName == newTurn.DoctorName);
+
+                if (schedule != null)
+                {
+                    // ✅ מצאנו את המערכת – נוסיף אליה את התור
+                    var turn = new Turn
+                    {
+                        TurnUserId = newTurn.TurnUserId,
+                        DoctorName = newTurn.DoctorName,
+                        DateTurn = newTurn.DateTurn,
+                        TurnLocate = newTurn.TurnLocate,
+                        Hour = newTurn.Hour,
+                        ArrivalConfirmation = newTurn.ArrivalConfirmation
+                    };
+
+                    schedule.turns.Add(turn);
+                    await context.SaveChangesAsync();
+                    return Ok("✅ התור נוסף בהצלחה!");
+                }
+                else
+                {
+                    return NotFound("❌ לא נמצאה מערכת עם שם הרופא הנתון.");
+                }
+            }
         }
 
         // PUT api/<UserController>/5

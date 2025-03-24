@@ -13,7 +13,7 @@ namespace FinalProject.Core.DTOs
         public int TurnId { get; set; }
         public int TurnUserId { get; set; }
         public string DoctorName { get; set; }
-        public int DoctorCode { get; set; }
+        //public int DoctorCode { get; set; }
         public DateTime DateTurn { get; set; }
         public string TurnLocate { get; set; }
         public string Hour { get; set; }

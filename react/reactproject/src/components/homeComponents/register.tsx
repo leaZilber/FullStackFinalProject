@@ -14,7 +14,7 @@ const RegisterComp= () => {
         setLoading(true);
         console.log(data);
         try {
-            const response = await axios.post("http://localhost:5131/api/User/register", {//להכניס api נכון
+            const response = await axios.post("https://localhost:7245/api/User", {
                 UserName: data.name,
                 UserEmail: data.email,
                 UserEncryptedPassword: data.password,

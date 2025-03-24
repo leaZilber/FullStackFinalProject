@@ -4,6 +4,7 @@ using FinalProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250324191255_withoutCodeDoc")]
+    partial class withoutCodeDoc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,10 +89,6 @@ namespace FinalProject.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScheduleId"));
 
-                    b.Property<string>("DoctorName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("ScheduleId");
 
                     b.ToTable("scheduleList");
@@ -141,6 +140,9 @@ namespace FinalProject.Data.Migrations
                     b.Property<DateTime>("DateTurn")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DoctorCode")
+                        .HasColumnType("int");
+
                     b.Property<string>("DoctorName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -149,7 +151,7 @@ namespace FinalProject.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ScheduleId")
+                    b.Property<int>("ScheduleId")
                         .HasColumnType("int");
 
                     b.Property<string>("TurnLocate")
@@ -244,13 +246,17 @@ namespace FinalProject.Data.Migrations
 
             modelBuilder.Entity("FinalProject.Core.Models.Turn", b =>
                 {
-                    b.HasOne("FinalProject.Core.Models.Schedule", null)
+                    b.HasOne("FinalProject.Core.Models.Schedule", "Schedule")
                         .WithMany("turns")
-                        .HasForeignKey("ScheduleId");
+                        .HasForeignKey("ScheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FinalProject.Core.Models.User", null)
                         .WithMany("Turns")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Schedule");
                 });
 
             modelBuilder.Entity("FinalProject.Core.Models.Schedule", b =>

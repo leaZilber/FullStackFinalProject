@@ -1,5 +1,4 @@
 import './App.css'
-// import { Schedule1 } from './components/schedule'
 import { Doctor } from './models/doctor';
 import { Schedule } from './models/schedule';
 import { Turn } from './models/turn';
@@ -8,7 +7,9 @@ import { Turn } from './models/turn';
 // import LoginComp from './homeComponents/login'
 // import RegisterComp from './homeComponents/register'
 // import { HomePage } from './components/homePage'
-import { CheckPicture } from './components/checkPictu'
+import SchedulePage from './components/schedule';
+// import { CheckPicture } from './components/checkPictu'
+// import Chat from './chat';
 
 function App() {
   const doctorsArr: Doctor[] = [//להחליף לקריאת API
@@ -68,8 +69,9 @@ function App() {
 
   return (
     <>
-      {/* <Schedule1 doctors={doctorsArr} /> */}
-      <CheckPicture/>
+      <SchedulePage/>
+      {/* <CheckPicture/> */}
+      {/* <Chat/> */}
       {/* <AboutUs/> */}
       {/* <InformationPage/> */}
       {/* <HomePage /> */}
