@@ -1,15 +1,17 @@
 import { Schedule } from "./schedule";
 
 export class Doctor {
-    DoctorCode: number;
+    DoctorId: number;
+    DoctorName: string;
     FieldOfSpecialization: string;
     LicenseNumber: number;
     DoctorSchedule: Schedule;
 
     constructor(data: Partial<Doctor> = {}) {
-        this.DoctorCode = data.DoctorCode ?? 0;
+        this.DoctorId = data.DoctorId ?? 0;
+        this.DoctorName = data.DoctorName ?? "";
         this.FieldOfSpecialization = data.FieldOfSpecialization ?? "";
         this.LicenseNumber = data.LicenseNumber ?? 0;
-        this.DoctorSchedule = data.DoctorSchedule ?? new Schedule();
+        this.DoctorSchedule = data.DoctorSchedule ??new Schedule();
     }
 }

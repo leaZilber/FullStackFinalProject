@@ -23,7 +23,7 @@ namespace FinalProject.Data.Repositories
 
         public Doctor? GetById(int id)
         {
-            return _context.doctorList.FirstOrDefault(item => item.DoctorCode == id);
+            return _context.doctorList.FirstOrDefault(item => item.DoctorId == id);
         }
 
         public async Task<Doctor> AddAsync(Doctor newDoctor)
@@ -35,7 +35,7 @@ namespace FinalProject.Data.Repositories
 
         public async Task<Doctor> UpdateAsync(Doctor upDoctor)
         {
-            var isExist = GetById(upDoctor.DoctorCode);
+            var isExist = GetById(upDoctor.DoctorId);
             if (isExist is null)
             {
                 throw new Exception("Doctor not found");

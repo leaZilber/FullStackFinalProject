@@ -47,7 +47,9 @@ namespace FinalProject.API.Controllers
         {
             var doctorPost = new Doctor()
             {
+
                 ScheduleId = value.ScheduleId,
+                DoctorName = value.DoctorName,
                 FieldOfSpecialization = value.FieldOfSpecialization,
                 LicenseNumber = value.LicenseNumber,
             };

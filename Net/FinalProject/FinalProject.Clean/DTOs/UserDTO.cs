@@ -15,6 +15,5 @@ namespace FinalProject.Core.DTOs
         public string UserRole { get; set; }
         public string UserPhone { get; set; }
         public string UserAddress { get; set; }
-
     }
 }

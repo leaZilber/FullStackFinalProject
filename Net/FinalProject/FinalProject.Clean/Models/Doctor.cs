@@ -11,7 +11,8 @@ namespace FinalProject.Core.Models
     public class Doctor
     {
         [Key]
-        public int DoctorCode { get; set; }
+        public int DoctorId { get; set; }
+        public string DoctorName { get; set; }
         public string FieldOfSpecialization { get; set; }
         public int LicenseNumber { get; set; }
         public int ScheduleId { get; set; }
