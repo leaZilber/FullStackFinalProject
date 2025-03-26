@@ -15,7 +15,7 @@ export class User {
     UserUpdateDate: Date;
     TestResualtArray: TestResult[];
     MessagesArr: Message[];
-    TurnsArr:Turn[];
+    TurnsArr: Turn[];
     constructor(data: Partial<User> = {}) {
         this.UserId = data.UserId ?? 0;
         this.UserName = data.UserName ?? "";
@@ -27,8 +27,8 @@ export class User {
         this.UserBirth = data.UserBirth ?? new Date();
         this.UserCreateDate = data.UserCreateDate ?? new Date();
         this.UserUpdateDate = data.UserUpdateDate ?? new Date();
-        this.TestResualtArray = data.TestResualtArray ?? [];
-        this.MessagesArr = data.MessagesArr ?? [];
-        this.TurnsArr=data.TurnsArr??[];
+        this.TestResualtArray = [];
+        this.MessagesArr = [];
+        this.TurnsArr = [];
     }
 }

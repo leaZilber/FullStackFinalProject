@@ -2,15 +2,18 @@ import axios from 'axios';
 import { useState } from 'react';
 import { TextField, Button, Container, Typography, Box, CircularProgress } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
+import HeaderPage from './header';
 
-const RegisterComp= () => {
+const RegisterComp = () => {
     const [registerError, setRegisterError] = useState('');
+    const [registerSuccess, setRegisterSuccess] = useState(''); // Added success state
     const [loading, setLoading] = useState(false);
 
     const { control, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async (data: any) => {
         setRegisterError('');
+        setRegisterSuccess('');
         setLoading(true);
         console.log(data);
         try {
@@ -28,19 +31,24 @@ const RegisterComp= () => {
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("userId", response.data.userId);
                 console.log("register successfully", response.data);
+                setRegisterSuccess("נרשמת בהצלחה!"); // Success message
             } else {
                 throw new Error("Registration failed");
             }
         } catch (error) {
             console.error("register failed", error);
-            setRegisterError("Registration failed. Please try again.");
+            setRegisterError("הרשמה נכשלה. נסה שוב.");
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <Container maxWidth="xs">
+        <>
+        <HeaderPage/>
+        <img src="../src/images/gray.jpg" className="backgroundAboutUs" alt="hospital img" />
+
+        <Container maxWidth="xs" > 
             <Box
                 sx={{
                     display: "flex",
@@ -48,13 +56,12 @@ const RegisterComp= () => {
                     alignItems: "center",
                     justifyContent: "center",
                     padding: 3,
-                    backgroundColor: "#f5f5f5",
                     borderRadius: 2,
                     boxShadow: 3,
                 }}
             >
-                <Typography variant="h5" gutterBottom>
-                    Register
+                <Typography variant="h5" gutterBottom color="primary">
+                    הרשמה
                 </Typography>
 
                 <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
@@ -64,16 +71,17 @@ const RegisterComp= () => {
                         name="name"
                         control={control}
                         defaultValue=""
-                        rules={{ required: "Name is required" }}
+                        rules={{ required: "שם הוא שדה חובה" }}
                         render={({ field }) => (
                             <TextField
                                 {...field}
-                                label="Name"
+                                label="שם"
                                 variant="outlined"
                                 fullWidth
                                 margin="normal"
                                 error={!!errors.name}
                                 helperText={errors.name?.message?.toString() || ""}
+                                sx={{ backgroundColor: '#ffffff' }} // White background for the input fields
                             />
                         )}
                     />
@@ -84,22 +92,23 @@ const RegisterComp= () => {
                         control={control}
                         defaultValue=""
                         rules={{
-                            required: "Email is required",
+                            required: "אימייל הוא שדה חובה",
                             pattern: {
                                 value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                                message: "Invalid email address"
+                                message: "כתובת אימייל לא תקינה"
                             }
                         }}
                         render={({ field }) => (
                             <TextField
                                 {...field}
-                                label="Email"
+                                label="אימייל"
                                 type="email"
                                 variant="outlined"
                                 fullWidth
                                 margin="normal"
                                 error={!!errors.email}
                                 helperText={errors.email?.message?.toString() || ""}
+                                sx={{ backgroundColor: '#ffffff' }} // White background for the input fields
                             />
                         )}
                     />
@@ -110,22 +119,23 @@ const RegisterComp= () => {
                         control={control}
                         defaultValue=""
                         rules={{
-                            required: "Password is required",
+                            required: "סיסמה היא שדה חובה",
                             minLength: {
                                 value: 6,
-                                message: "Password must be at least 6 characters"
+                                message: "הסיסמה חייבת להיות לפחות 6 תווים"
                             }
                         }}
                         render={({ field }) => (
                             <TextField
                                 {...field}
-                                label="Password"
+                                label="סיסמה"
                                 type="password"
                                 variant="outlined"
                                 fullWidth
                                 margin="normal"
                                 error={!!errors.password}
                                 helperText={errors.password?.message?.toString() || ""}
+                                sx={{ backgroundColor: '#ffffff' }} // White background for the input fields
                             />
                         )}
                     />
@@ -135,16 +145,17 @@ const RegisterComp= () => {
                         name="role"
                         control={control}
                         defaultValue=""
-                        rules={{ required: "Role is required" }}
+                        rules={{ required: "תפקיד הוא שדה חובה" }}
                         render={({ field }) => (
                             <TextField
                                 {...field}
-                                label="Role"
+                                label="תפקיד"
                                 variant="outlined"
                                 fullWidth
                                 margin="normal"
                                 error={!!errors.role}
                                 helperText={errors.role?.message?.toString() || ""}
+                                sx={{ backgroundColor: '#ffffff' }} // White background for the input fields
                             />
                         )}
                     />
@@ -155,21 +166,22 @@ const RegisterComp= () => {
                         control={control}
                         defaultValue=""
                         rules={{
-                            required: "Phone number is required",
+                            required: "מספר טלפון הוא שדה חובה",
                             pattern: {
                                 value: /^[0-9]{10}$/,
-                                message: "Invalid phone number"
+                                message: "מספר טלפון לא תקין"
                             }
                         }}
                         render={({ field }) => (
                             <TextField
                                 {...field}
-                                label="Phone"
+                                label="טלפון"
                                 variant="outlined"
                                 fullWidth
                                 margin="normal"
                                 error={!!errors.phone}
                                 helperText={errors.phone?.message?.toString() || ""}
+                                sx={{ backgroundColor: '#ffffff' }} // White background for the input fields
                             />
                         )}
                     />
@@ -179,16 +191,17 @@ const RegisterComp= () => {
                         name="address"
                         control={control}
                         defaultValue=""
-                        rules={{ required: "Address is required" }}
+                        rules={{ required: "כתובת היא שדה חובה" }}
                         render={({ field }) => (
                             <TextField
                                 {...field}
-                                label="Address"
+                                label="כתובת"
                                 variant="outlined"
                                 fullWidth
                                 margin="normal"
                                 error={!!errors.address}
                                 helperText={errors.address?.message?.toString() || ""}
+                                sx={{ backgroundColor: '#ffffff' }} // White background for the input fields
                             />
                         )}
                     />
@@ -198,11 +211,11 @@ const RegisterComp= () => {
                         name="birthDate"
                         control={control}
                         defaultValue=""
-                        rules={{ required: "Birth date is required" }}
+                        rules={{ required: "תאריך לידה הוא שדה חובה" }}
                         render={({ field }) => (
                             <TextField
                                 {...field}
-                                label="Birth Date"
+                                label="תאריך לידה"
                                 type="date"
                                 variant="outlined"
                                 fullWidth
@@ -212,6 +225,7 @@ const RegisterComp= () => {
                                 }}
                                 error={!!errors.birthDate}
                                 helperText={errors.birthDate?.message?.toString() || ""}
+                                sx={{ backgroundColor: '#ffffff' }} // White background for the input fields
                             />
                         )}
                     />
@@ -219,6 +233,12 @@ const RegisterComp= () => {
                     {registerError && (
                         <Typography color="error" variant="body2" align="center" gutterBottom>
                             {registerError}
+                        </Typography>
+                    )}
+
+                    {registerSuccess && (
+                        <Typography color="primary" variant="body2" align="center" gutterBottom>
+                            {registerSuccess} {/* Success message */}
                         </Typography>
                     )}
 
@@ -230,11 +250,12 @@ const RegisterComp= () => {
                         sx={{ marginTop: 2 }}
                         disabled={loading}
                     >
-                        {loading ? <CircularProgress size={24} /> : "Register"}
+                        {loading ? <CircularProgress size={24} /> : "הירשם"}
                     </Button>
                 </form>
             </Box>
         </Container>
+        </>
     );
 };
 

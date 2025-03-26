@@ -15,5 +15,6 @@ namespace FinalProject.Core.IServices
         Task<User> AddAsync(User user);
         Task<User> UpDateAsync(User user);
         void Delete(int id);
+
     }
 }

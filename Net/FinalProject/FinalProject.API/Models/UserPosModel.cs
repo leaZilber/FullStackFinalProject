@@ -4,7 +4,6 @@ namespace FinalProject.API.Models
 {
     public class UserPostModel
     {
-        public int UserId { get; set; }
         public string UserName { get; set; }
         public string UserEmail { get; set; }
         public string UserEncryptedPassword { get; set; }
@@ -12,7 +11,5 @@ namespace FinalProject.API.Models
         public string UserPhone { get; set; }
         public string UserAddress { get; set; }
         public DateTime UserBirth { get; set; }
-        public DateTime UserCreateDate { get; set; }
-        public DateTime UserUpdateDate { get; set; }
     }
 }

@@ -47,7 +47,6 @@ namespace FinalProject.API.Controllers
         {
             var userPost = new User()
             {
-                UserId = value.UserId,
                 UserName = value.UserName,
                 UserEmail = value.UserEmail,
                 UserEncryptedPassword = value.UserEncryptedPassword,
@@ -55,8 +54,6 @@ namespace FinalProject.API.Controllers
                 UserAddress = value.UserAddress,
                 UserBirth = value.UserBirth,
                 UserRole = value.UserRole,
-                UserCreateDate = value.UserCreateDate,
-                UserUpdateDate = value.UserUpdateDate,
             };
             var newUser = await _userService.AddAsync(userPost);
             return Ok(newUser);

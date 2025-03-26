@@ -9,10 +9,8 @@ export const InformationPage = () => {
                     Melanoma fact sheet
                 </p>
             </div>
-            <img src="../src/images/white.jpg" className="backgroundAboutUs" alt="hospital img" />
-
+            <img src="../src/images/gray.jpg" className="backgroundAboutUs" alt="hospital img" />
             <div id="sidebarInfo">
-
             </div>
             <div id="informarioncontainer">
                 <h3>

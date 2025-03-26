@@ -13,7 +13,7 @@ namespace FinalProject.Core.Models
         [Key]
         public int TestId { get; set; }
         public DateTime TestDate { get; set; }
-        public string ImageUrl { get; set; }
+        public byte[] ImageFileData { get; set; }
         public int PatientId { get; set; }
         public string Summary { get; set; }
     }

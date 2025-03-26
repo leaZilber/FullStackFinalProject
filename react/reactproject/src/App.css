@@ -122,7 +122,6 @@ button {
   transition: opacity 0.3s ease, background-color 0.3s ease;
 }
 
-/* כשהעכבר עובר על הכפתורים – אין שינוי גודל, רק צבע */
 button:hover {
   opacity: 0.7;
 }
@@ -130,101 +129,90 @@ button:hover {
 #informarioncontainer {
   width: 60%;
   position: absolute;
-  /* מיקום מוחלט */
   right: 65px;
-  /* להצמיד לימין */
   top: 180px;
-  /* התאמת המיקום כך שלא יתחיל מתחת ל-header (שנה את הערך בהתאם לגובה ה-header) */
   direction: rtl;
-  /* כיוון כתיבה ימין-לשמאל */
   text-align: right;
-  /* יישור הטקסט לימין */
   overflow-x: hidden;
 }
 
 .infoTitle {
   position: fixed;
-  /* גורם לאלמנט להישאר במקום קבוע בעת גלילה */
   top: 65px;
-  /* מרווח מהחלק העליון של המסך */
   left: 0;
-  /* מבטיח שהוא מתחיל מקצה שמאל */
   right: 0;
-  /* מבטיח שהוא נמתח עד קצה ימין */
   background-color: white;
-  /* רקע לבן */
   width: 100%;
-  /* מכסה את כל רוחב המסך */
   z-index: 1000;
-  /* מבטיח שהכותרת תהיה מעל שאר האלמנטים */
   padding: 10px 0;
-  /* מוסיף רווח פנימי */
   display: flex;
-  /* מאפשר יישור טוב יותר */
   justify-content: center;
-  /* ממרכז אופקית */
   align-items: center;
-  /* ממרכז אנכית */
   height: 80px;
-  /* הגבהתי ל-80px כדי שיהיה מקום לטקסט */
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  /* מוסיף צל עדין להפרדה */
 }
 
 .infoText {
   font-size: 20px;
   text-align: center;
-  /* ממרכז טקסט */
   margin: 0;
-  /* מבטל מרווחים פנימיים */
   width: 100%;
-  /* גורם לטקסט להתרחב לכל הרוחב */
   white-space: nowrap;
-  /* מונע שבירת שורה אם יש בעיה ברוחב */
   overflow: hidden;
-  /* מונע גלילה פנימית */
   text-overflow: ellipsis;
-  /* מוסיף "..." במקרה שהטקסט נחתך */
 }
 
-#sidebarInfo {
-  background-color: white;
-  opacity: 0.5;
+.backgroundAboutUs {
+  opacity: 0.25;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  object-fit: cover;
+  margin: 0;
+}
+
+.aboutUsContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 20px;
+  margin-top: 120px; /* Ensures content starts below the header */
+}
+
+.sidebarInfo {
+  width: 55%;
+  text-align: left; /* Changed to left for left-to-right text direction */
+  padding: 20px;
+  font-size: 18px; /* Increased font size for better readability */
+  line-height: 1.6; /* Increases the space between lines for clarity */
 }
 
 #galery {
-  top: 150px;
-  width: 40%;
-  
+  width: 35%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
   align-items: center;
-  gap: 20px;
+  /* Centers images horizontally */
+  margin-top: 20px; /* Ensures gallery starts below content */
+  position: relative;
 }
 
 .imgGalery {
   width: 100%;
-  max-height: auto;
+  max-width: 300px;
   object-fit: cover;
   border-radius: 8px;
-  z-index: 100;
-  position: relative;
+  transition: transform 0.3s ease-in-out; 
 }
 
-.backgroundAboutUs {
-  opacity: 0.4;
-  width: 100%;  
-  height: 100vh; 
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  z-index: -1;  
-  object-fit: cover; 
-  margin: 0; 
-} 
+.imgGalery:hover {
+  transform: scale(1.05); 
+}
 
- 
 .chat-container {
   width: 400px;
   margin: auto;

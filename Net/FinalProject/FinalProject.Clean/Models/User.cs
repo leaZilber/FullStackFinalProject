@@ -19,7 +19,6 @@ namespace FinalProject.Core.Models
         public string UserAddress { get; set; }
         public DateTime UserBirth { get; set; }
         public DateTime UserCreateDate { get; set; }
-        public DateTime UserUpdateDate { get; set; }
         public List<Turn> Turns { get; set; }
         public List<TestResualt> TestResualts { get; set; }
         public List<Message> Messages { get; set; }

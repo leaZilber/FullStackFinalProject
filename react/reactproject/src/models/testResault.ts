@@ -1,14 +1,15 @@
 export class TestResult {
-    TestId: string;
+    TestId: number;
     TestDate: Date;
-    ImageUrl: string;
-    PatientId: string;
+    ImageFile: string; // Base64 string
+    PatientId: number;
     Summary: string;
+
     constructor(data: Partial<TestResult> = {}) {
-        this.TestId = data.TestId ?? "UNKNOWN";
+        this.TestId = data.TestId ?? 0;
         this.TestDate = data.TestDate ?? new Date();
-        this.ImageUrl = data.ImageUrl ?? "";
-        this.PatientId = data.PatientId ?? "";
+        this.ImageFile = data.ImageFile ?? "";
+        this.PatientId = data.PatientId ?? 0;
         this.Summary = data.Summary ?? "No summary available";
     }
 }
