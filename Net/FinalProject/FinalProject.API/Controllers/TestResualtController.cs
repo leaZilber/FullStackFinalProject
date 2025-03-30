@@ -10,6 +10,7 @@
 
 //namespace FinalProject.API.Controllers
 //{
+//[Authorize]
 //    [Route("api/[controller]")]
 //    [ApiController]
 //    public class TestResualtController : ControllerBase
@@ -78,9 +79,12 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Threading.Tasks;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FinalProject.API.Controllers
 {
+    [Authorize]
+
     [Route("api/[controller]")]
     [ApiController]
     public class TestResualtController : ControllerBase

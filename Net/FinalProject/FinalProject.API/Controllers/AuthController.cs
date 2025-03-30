@@ -28,7 +28,7 @@ namespace FinalProject.API.Controllers
         {
             // חיפוש משתמש לפי שם משתמש
             var user = await _context.userList
-                .FirstOrDefaultAsync(u => u.UserId == loginModel.LoginId);
+                .FirstOrDefaultAsync(u => u.UserName == loginModel.UserName);
 
             if (user == null || user.UserEncryptedPassword != loginModel.Password)
             {

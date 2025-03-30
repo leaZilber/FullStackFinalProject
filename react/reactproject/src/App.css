@@ -264,3 +264,64 @@ input {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+
+.personal-area-container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 30%;
+  background-color: #2f3b52;
+  padding: 20px;
+  color: white;
+  font-family: 'Arial', sans-serif;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 15px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar li:hover {
+  background-color: #3a4d6a;
+}
+
+.main-content {
+  width: 70%;
+  padding: 30px;
+  font-family: 'Arial', sans-serif;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 36px;
+  color: #333;
+}
+
+.content {
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  min-height: 70vh;
+}
+
+.content h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.content p {
+  font-size: 18px;
+  color: #666;
+}

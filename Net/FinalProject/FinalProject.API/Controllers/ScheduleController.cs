@@ -5,12 +5,14 @@ using FinalProject.Core.DTOs;
 using FinalProject.Core.IServices;
 using FinalProject.Core.Models;
 using FinalProject.Service.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace FinalProject.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ScheduleController : ControllerBase
@@ -24,6 +26,7 @@ namespace FinalProject.API.Controllers
             _mapper = mapper;
         }
         // GET: api/<ScheduleController>
+
         [HttpGet]
         public async Task<ActionResult> Get()
         {
