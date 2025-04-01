@@ -24,23 +24,64 @@ namespace FinalProject.API.Controllers
         }
 
         [HttpPost]
+        //public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
+        //{
+        //    // חיפוש משתמש לפי שם משתמש
+        //    var user = await _context.userList
+        //        .FirstOrDefaultAsync(u => u.UserName == loginModel.UserName);
+
+        //    if (user == null || user.UserEncryptedPassword != loginModel.Password)
+        //    {
+        //        return Unauthorized(new { message = "Invalid credentials" });
+        //    }
+
+        //    // יצירת הרשאות לטוקן
+        //    var claims = new List<Claim>
+        //    {
+        //        new Claim(ClaimTypes.Name, user.UserEmail),
+        //        new Claim(ClaimTypes.Role, user.UserRole)
+        //    };
+
+        //    var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
+        //    var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+        //    var tokenOptions = new JwtSecurityToken(
+        //        issuer: _configuration["JWT:Issuer"],
+        //        audience: _configuration["JWT:Audience"],
+        //        claims: claims,
+        //        expires: DateTime.UtcNow.AddMinutes(30),
+        //        signingCredentials: signinCredentials
+        //    );
+
+        //    var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+        //    return Ok(new { Token = tokenString });
+        //}
+        [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
         {
-            // חיפוש משתמש לפי שם משתמש
+            if (loginModel == null || string.IsNullOrWhiteSpace(loginModel.UserName) || string.IsNullOrWhiteSpace(loginModel.Password))
+            {
+                return BadRequest(new { message = "Username and password are required." });
+            }
+
             var user = await _context.userList
                 .FirstOrDefaultAsync(u => u.UserName == loginModel.UserName);
 
-            if (user == null || user.UserEncryptedPassword != loginModel.Password)
+            if (user == null)
             {
-                return Unauthorized(new { message = "Invalid credentials" });
+                return Unauthorized(new { message = "Invalid username or password." });
             }
 
-            // יצירת הרשאות לטוקן
-            var claims = new List<Claim>
+            if (user.UserEncryptedPassword != loginModel.Password)
             {
-                new Claim(ClaimTypes.Name, user.UserEmail),
-                new Claim(ClaimTypes.Role, user.UserRole)
-            };
+                return Unauthorized(new { message = "Invalid username or password." });
+            }
+
+            var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.Name, user.UserEmail),
+        new Claim(ClaimTypes.Role, user.UserRole)
+    };
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
@@ -54,7 +95,8 @@ namespace FinalProject.API.Controllers
             );
 
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-            return Ok(new { Token = tokenString });
+
+            return Ok(new { token = tokenString });
         }
     }
 }
