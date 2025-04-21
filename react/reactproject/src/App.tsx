@@ -6,14 +6,15 @@ import { InformationPage } from './components/information'
 import { AboutUs } from './components/aboutUs'
 import LoginComp from './components/homeComponents/login'
 import RegisterComp from './components/homeComponents/register'
-// import { CheckPicture } from './components/checkPictu'
-// import SchedulePage from './components/schedule'
+import { CheckPicture } from './components/checkPictu'
+import SchedulePage from './components/schedule'
 
 function App() {
   return (
     <>
+    <SchedulePage/>
       {/* <CheckPicture/> */}
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/homePage" element={<HomePage />} />
         <Route path="/informationArea" element={<InformationPage />} />
@@ -22,7 +23,7 @@ function App() {
         <Route path="/register" element={<RegisterComp />} />
         <Route path='/personalArea' element={<PersonalArea />} />
         <Route path="*" element={<HomePage />} />
-      </Routes>
+      </Routes> */}
     </>
   )
 }
