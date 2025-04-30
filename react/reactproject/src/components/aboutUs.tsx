@@ -79,6 +79,7 @@
 // }
 
 
+import React from "react";
 import HeaderPage from "./homeComponents/header";
 
 export const AboutUs = () => {

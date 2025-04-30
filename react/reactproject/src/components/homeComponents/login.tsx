@@ -4,6 +4,7 @@ import { TextField, Button, Container, Typography, Box, CircularProgress } from 
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import HeaderPage from "./header";
+import React from "react";
 
 const LoginComp = () => {
   const [loginError, setLoginError] = useState("");
@@ -95,7 +96,7 @@ const LoginComp = () => {
               defaultValue=""
               rules={{
                 required: "Password is required",
-                minLength: { value: 6, message: "Password must be at least 6 characters" }
+                minLength: { value: 4, message: "Password must be at least 4 characters" }
               }}
               render={({ field }) => (
                 <TextField

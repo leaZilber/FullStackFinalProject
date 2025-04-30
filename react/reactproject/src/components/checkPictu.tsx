@@ -144,6 +144,7 @@ import { useState } from "react";
 import HeaderPage from "./homeComponents/header";
 import { TestResult } from "../models/testResault";
 import SchedulePage from "./schedule";
+import React from "react";
 
 const checkSkinCancer = async (imageBase64: any) => {
   try {
@@ -233,7 +234,6 @@ export const CheckPicture = () => {
 
   return (
     <>
-      <HeaderPage />
       <img src="../src/images/white.jpg" className="backgroundAboutUs" alt="hospital img" />
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <input type="file" onChange={handleImageChange} accept="image/*" id="fileInput" style={{ display: "none" }} />

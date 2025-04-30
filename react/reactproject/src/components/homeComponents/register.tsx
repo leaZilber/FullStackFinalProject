@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { TextField, Button, Container, Typography, Box, CircularProgress } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import HeaderPage from './header';
+import React from 'react';
 
 const RegisterComp = () => {
     const [registerError, setRegisterError] = useState('');
